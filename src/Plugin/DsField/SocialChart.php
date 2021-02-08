@@ -23,4 +23,5 @@ class SocialChart extends DsChart
 {
   const THEME = 'social_chart';
   const LIBRARY = 'macaroni_charts/charts_social';
+  const RESOURCE = 'macaroni-charts/social-chart';
 }

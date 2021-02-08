@@ -19,8 +19,10 @@ use Drupal\file\Entity\File;
 *   ui_limit = {"vertical_bar_stacked_chart|default"}
 * )
 */
-class VerticalBarStackedChart extends BarChart
+class VerticalBarStackedChart extends DsChart
 {
 
-  const RESOURCE = '/macaroni-charts/vertical-bar-stacked-chart';
+  const THEME = 'bar_chart';
+  const LIBRARY = 'macaroni_charts/charts_bar';
+  const RESOURCE = 'macaroni-charts/vertical-bar-stacked-chart';
 }

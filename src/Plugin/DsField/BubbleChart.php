@@ -23,4 +23,5 @@ class BubbleChart extends DsChart
 {
   const THEME = 'bubble_chart';
   const LIBRARY = 'macaroni_charts/charts_bubble';
+  const RESOURCE = 'macaroni-charts/bubble-chart';
 }

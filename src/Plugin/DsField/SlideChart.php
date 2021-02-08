@@ -24,5 +24,6 @@ class SlideChart extends DsChart
 
   const THEME = 'slide_chart';
   const LIBRARY = 'macaroni_charts/charts_slide';
+  const RESOURCE = 'macaroni-charts/slide-chart';
 
 }

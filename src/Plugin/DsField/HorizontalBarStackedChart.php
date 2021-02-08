@@ -19,8 +19,10 @@ use Drupal\file\Entity\File;
 *   ui_limit = {"horizontal_bar_stacked_chart|default"}
 * )
 */
-class HorizontalBarStackedChart extends BarChart {
+class HorizontalBarStackedChart extends DsChart {
 
-  const RESOURCE = '/macaroni-charts/horizontal-bar-stacked-chart';
+  const THEME = 'bar_chart';
+  const LIBRARY = 'macaroni_charts/charts_bar';
+  const RESOURCE = 'macaroni-charts/horizontal-bar-stacked-chart';
 
 }

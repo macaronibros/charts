@@ -19,8 +19,10 @@ use Drupal\file\Entity\File;
  *   ui_limit = {"doughnut_chart|default"}
  * )
  */
-class DoughnutChart extends CircleChart {
+class DoughnutChart extends DsChart {
 
-  const RESOURCE = '/macaroni-charts/doughnut-chart';
+  const THEME = 'circle_chart';
+  const LIBRARY = 'macaroni_charts/charts_circle';
+  const RESOURCE = 'macaroni-charts/doughnut-chart';
 
 }

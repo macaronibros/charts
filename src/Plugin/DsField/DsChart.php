@@ -13,6 +13,7 @@ class DsChart extends DsFieldBase
 
   const THEME = '';
   const LIBRARY = '';
+  const RESOURCE = '';
 
   protected $build_info;
 
@@ -23,12 +24,15 @@ class DsChart extends DsFieldBase
   {
     $entity = $this->entity();
 
+
+
     $library = [
       'library' => [static::LIBRARY],
     ];
 
     $this->build_info = array(
       '#theme' => static::THEME,
+      '#resource' => base_path().static::RESOURCE,
       '#attached' => $library,
       '#id' => $entity->id(),
     );

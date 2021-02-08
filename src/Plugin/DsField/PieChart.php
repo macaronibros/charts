@@ -19,8 +19,10 @@ use Drupal\file\Entity\File;
  *   ui_limit = {"pie_chart|default"}
  * )
  */
-class PieChart extends CircleChart {
+class PieChart extends DsChart {
 
+  const THEME = 'circle_chart';
+  const LIBRARY = 'macaroni_charts/charts_circle';
   const RESOURCE = 'macaroni-charts/pie-chart';
 
 }

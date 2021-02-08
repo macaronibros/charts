@@ -52,34 +52,20 @@ function macaroni_charts_field_widget_icon_select_widget_default_form_alter(&$el
  *  Implements hook_theme().
  */
 function macaroni_charts_theme($existing, $type, $theme, $path) {
+
+  $variables = [
+    'variables' => [
+      'id' => [],
+      'resource' => [],
+    ],
+  ];
+
   return [
-    'social_chart' => [
-      'variables' => [
-        'id' => [],
-      ],
-    ],
-    'bubble_chart' => [
-      'variables' => [
-        'id' => [],
-      ],
-    ],
-    'slide_chart' => [
-      'variables' => [
-        'id' => [],
-      ],
-    ],
-    'bar_chart' => [
-      'variables' => [
-        'id' => [],
-        'resource' => [],
-      ],
-    ],
-    'circle_chart' => [
-      'variables' => [
-        'id' => [],
-        'resource' => [],
-      ],
-    ],
+    'social_chart' => $variables,
+    'bubble_chart' => $variables,
+    'slide_chart' => $variables,
+    'bar_chart' => $variables,
+    'circle_chart' => $variables
   ];
 }
 
@@ -117,6 +103,7 @@ function macaroni_charts_library_info_build() {
   }
 
   $libraries['chartjs']['js']['/' . $libraries_path . '/dist/chartjs-plugin-deferred.min.js'] = ['minified' => TRUE];
+
 
   $libraries_path = 'libraries/jquery-visible';
   if (\Drupal::hasService('library.libraries_directory_file_finder')) {

@@ -65,22 +65,23 @@
 
     //generate social widget structure
     $.each(current_data.data, function (index) {
-      var $li = $('<li style="color:'+current_data.backgroundColor[0]+'" data-hover="'+ current_data.backgroundColor[1] +'" data-color="'+current_data.backgroundColor[0]+'"></li>');
+      var $li = $('<li style="color:' + current_data.backgroundColor[0] + '" data-hover="' + current_data.backgroundColor[1] + '" data-color="' + current_data.backgroundColor[0] + '"></li>');
 
-      var element = '<div class="social" style="border-color:'+current_data.borderColor[0]+'"><div class="icon">' + current_data.icons[index] + '</div><span class="arrow-down" style="border-top-color:'+current_data.borderColor[0]+'"></span></div>';
+      var element = '<div class="social" style="border-color:' + current_data.borderColor[0] + '"><div class="icon" style="fill:' + current_data.borderColor[0] + '">' + current_data.icons[index] + '</div>' +
+        '<span class="arrow-down" style="border-top-color:' + current_data.borderColor[0] + '"></span></div>';
 
-      element += '<div class="k-format">' + charts_social._nFormatter(current_data.data[index]) + '</div>';
+      element += '<div class="n-format">' + charts_social._nFormatter(current_data.data[index]) + '</div>';
 
-      element += '<h6>' +data.data.labels[index] + '</h6>';
+      element += '<h6>' + data.data.labels[index] + '</h6>';
 
 
       $ul.append($li);
       $li.append(element);
 
-      $li.hover( charts_social.onHoverIn , charts_social.onHoverOut);
+      $li.hover(charts_social.onHoverIn, charts_social.onHoverOut);
 
       //setup style based on data
-      charts_social.setUpSocialStyle($ul, current_data, $li , index);
+      charts_social.setUpSocialStyle($ul, current_data, $li, index);
     });
   }
 
@@ -88,23 +89,25 @@
    * Hover in
    * @param event
    */
-  charts_social.onHoverIn = function(event) {
+  charts_social.onHoverIn = function (event) {
 
     var $this = $(this);
 
     var color = $this.data('hover');
 
+    var $social_item = $this.children('.social');
+    var $arrow_down = $social_item.children('.arrow-down');
+
     $this.css({
-      'border-color':color,
       'color': color
     });
 
-    $this.find('.social').css({
-      'border-color':color,
+    $social_item.css({
+      'border-color': color,
       'color': color
     });
-    $this.find('svg').css('fill', color)
-    $this.find('.arrow-down').css('border-top-color', color)
+    $social_item.children('.icon').children('svg').css('fill', color);
+    $arrow_down.css('border-top-color', color);
 
   };
 
@@ -112,23 +115,26 @@
    * Hover out
    * @param event
    */
-  charts_social.onHoverOut = function(event) {
+  charts_social.onHoverOut = function (event) {
 
     var $this = $(this);
 
     var color = $this.data('color');
 
+    var $social_item = $this.children('.social');
+    var $arrow_down = $social_item.children('.arrow-down');
+
     $this.css({
-      'border-color':color,
+      'border-color': color,
       'color': color
     });
 
-    $this.find('.social').css({
-      'border-color':color,
+    $social_item.css({
+      'border-color': color,
       'color': color
     });
-    $this.find('svg').css('fill', color)
-    $this.find('.arrow-down').css('border-top-color', color)
+    $social_item.children('.icon').children('svg').css('fill', color)
+    $arrow_down.css('border-top-color', color)
 
   };
 
@@ -142,29 +148,25 @@
    * current data from endpoint
    */
   charts_social.setUpSocialStyle = function ($ul, current_data, $current, index) {
-    var width, height, font_icon, font_number, font_label, border_width;
+    var width, height, font_icon, font_label, border_width;
 
     // Calculate social chart elements value based on number of items
     if (current_data.data.length > 6 && !charts_social._isMobile()) {
       width = ($ul.width() / current_data.data.length) - 20;
       height = width;
       font_icon = (width * 50) / 100;
-      font_number = (width * 28) / 100;
       font_label = (width * 16) / 100;
       border_width = (width * 12) / 100
-    } else if(charts_social._isMobile()){
+    } else if (charts_social._isMobile()) {
       width = 60;
       height = 60;
       font_icon = 30;
-      font_number = 18;
       font_label = 16;
       border_width = 6;
-    }
-    else {
+    } else {
       width = 100;
       height = 100;
       font_icon = 50;
-      font_number = 28;
       font_label = 16;
       border_width = 12;
     }
@@ -172,8 +174,6 @@
     var $social_item = $current.children('.social');
     var $arrow_down = $social_item.children('.arrow-down');
 
-    var backgroundColor = current_data.backgroundColor[0];
-    var borderColor  = current_data.borderColor[0];
     var borderWidth = current_data.borderWidth;
 
 
@@ -187,7 +187,6 @@
 
     //change style of icon
     $social_item.children('.icon').children().css({
-      'fill': borderColor,
       'width': font_icon,
       'height': font_icon,
     });
@@ -281,24 +280,24 @@
    * Formatted number
    * @private
    */
-  charts_social._nFormatter = function (number,digits= 2) {
+  charts_social._nFormatter = function (number, digits = 2) {
     var value = [
-      { value: 1, symbol: "" },
-      { value: 1E3, symbol: "K" },
-      { value: 1E6, symbol: "M" },
-      { value: 1E9, symbol: "G" },
-      { value: 1E12, symbol: "T" },
-      { value: 1E15, symbol: "P" },
-      { value: 1E18, symbol: "E" }
+      {value: 1, symbol: ""},
+      {value: 1E3, symbol: "K"},
+      {value: 1E6, symbol: "M"},
+      {value: 1E9, symbol: "G"},
+      {value: 1E12, symbol: "T"},
+      {value: 1E15, symbol: "P"},
+      {value: 1E18, symbol: "E"}
     ];
     var regExp = /\.0+$|(\.[0-9]*[1-9])0+$/;
     var i = value.length - 1;
-    for (i ; i > 0; i--) {
+    for (i; i > 0; i--) {
       if (number >= value[i].value) {
         break;
       }
     }
-    return '<div class="number">'+(number / value[i].value).toFixed(digits).replace(regExp, "$1")+ '</div>' + value[i].symbol;
+    return '<div class="number">' + (number / value[i].value).toFixed(digits).replace(regExp, "$1") + '</div>' + value[i].symbol;
   }
 
 
@@ -310,7 +309,7 @@
    * @private
    */
   charts_social._countDecimal = function (number) {
-    if(Math.floor(number) === number) return 0;
+    if (Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
   }
 

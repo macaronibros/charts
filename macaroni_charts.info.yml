@@ -12,5 +12,7 @@ dependencies:
   - icon_select
   - select2
   - ds
+  - field_group
+  - rest
 version: 8.x-1.0
 configure: macaroni_charts.settings

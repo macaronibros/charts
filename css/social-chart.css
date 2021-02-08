@@ -25,7 +25,7 @@
 .chart-wrapper-social .social-infographics li:before {
   display: none;
 }
-.chart-wrapper-social .social-infographics .k-format .number {
+.chart-wrapper-social .social-infographics .n-format .number {
   display: inline;
 }
 .chart-wrapper-social .social-infographics .social {
@@ -38,7 +38,6 @@
   font-size: 32px;
   border-radius: 50%;
 }
-
 
 .chart-wrapper-social .social-infographics .social .arrow-down {
   position: absolute;
@@ -66,9 +65,6 @@
   transform: translate(-50%, -50%);
 }
 
-.paragraph--type-social-chart h2 {
-  margin-bottom: 30px;
-}
 
 @media only screen and (max-width: 1024px) {
   .chart-wrapper-social .social-infographics {

@@ -72,7 +72,7 @@
 
       var element = '<div class="bubble"><div class="bubble-title">' + current_data.labels[index] + '</div>';
 
-      element += '<div class="k-format">' + charts_bubble._nFormatter(current_data.data[index]) + '</div>';
+      element += '<div class="n-format">' + charts_bubble._nFormatter(current_data.data[index]) + '</div>';
 
       element += '</div>';
 
@@ -204,8 +204,7 @@
   charts_bubble.setUpText = function ($elements) {
     $elements.each(function () {
       $(this).children().children('.bubble-title').css('font-size', $(this).width() * 0.1);
-      $(this).children().children('.bubble-number').css('font-size', $(this).width() * 0.2);
-      $(this).children().children('.k-format').css('font-size', $(this).width() * 0.2)
+      $(this).children().children('.n-format').css('font-size', $(this).width() * 0.2)
     })
   }
 

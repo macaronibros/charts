@@ -23,7 +23,6 @@ use Psr\Log\LoggerInterface;
  */
 class HorizontalBarChartResource extends BarChartResource {
 
-
   const TYPE = 'horizontal_bar_chart';
   const CHART_TYPE = 'horizontalBar';
 

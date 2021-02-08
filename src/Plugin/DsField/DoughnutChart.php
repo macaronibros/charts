@@ -12,15 +12,15 @@ use Drupal\file\Entity\File;
  * Plugin that renders the terms from a chosen taxonomy vocabulary.
  *
  * @DsField(
- *   id = "macaroni_pie_chart",
+ *   id = "macaroni_doughnut_chart",
  *   title = @Translation("Chart"),
  *   entity_type = "paragraph",
  *   provider = "macaroni_charts",
- *   ui_limit = {"pie_chart|default"}
+ *   ui_limit = {"doughnut_chart|default"}
  * )
  */
-class PieChart extends CircleChart {
+class DoughnutChart extends CircleChart {
 
-  const RESOURCE = 'macaroni-charts/pie-chart';
+  const RESOURCE = '/macaroni-charts/doughnut-chart';
 
 }

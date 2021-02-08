@@ -73,16 +73,16 @@
 
     $.each(current_data.data, function (index) {
 
-      var $element = '<li class="slide-item">'
+      var $li = $('<li class="slide-item"></li>');
 
-      $element += '<div class="icon">' + current_data.icons[index] + '</div>';
-      $element += '<div class="slide-info">' + current_data.info[index] + '<div class="triangle-right"></div></div>'
-      $element += '<div class="number"><div class="number-item">' + current_data.labels[index] + '</div><div class="triangle-right"></div>';
-      $element += '</li>';
+      var element = '<div class="icon">' + current_data.icons[index] + '</div>';
+      element += '<div class="slide-info">' + current_data.info[index] + '<div class="triangle-right"></div></div>'
+      element += '<div class="number"><div class="number-item">' +  charts_slide._formatNumber(current_data.data[index],index,current_data) + '</div><div class="triangle-right"></div>';
 
-      $ul.append($element);
+      $ul.append($li);
+      $li.append(element);
 
-      charts_slide.setUpSlideStyle($($ul.children('li')[index]), index, current_data);
+      charts_slide.setUpSlideStyle($li, index, current_data);
     });
 
     charts_slide.setUpSlideWidth($ul, current_data, min, max);
@@ -251,6 +251,43 @@
   charts_slide._isMobile = function () {
     return $(window).width() <= 1024
   }
+
+
+  /**
+   * Form number En notation
+   * @param string
+   * current data
+   * @param index
+   * current index of data
+   * @param data
+   * data from JSON
+   * @returns {string}
+   * @private
+   */
+  charts_slide._formatNumber = function (string, index, data) {
+    if(charts_slide._countDecimal(parseFloat(string)) === 0) {
+      string = parseFloat(string).toFixed(0)
+    }
+     var formatted_number = string.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    if(data.unit_position[index].length > 0 && data.unit_position[index] === "before") {
+      return data.unit[index]+' '+ formatted_number;
+    }else {
+      return formatted_number+' '+data.unit[index];
+    }
+  }
+
+  /**
+   * Get number of decimal position of number
+   * @param number
+   * @returns {number|number}
+   * number of decimal position of number
+   * @private
+   */
+  charts_slide._countDecimal = function (number) {
+    if(Math.floor(number) === number) return 0;
+    return number.toString().split(".")[1].length || 0;
+  }
+
 
 })(jQuery);
 

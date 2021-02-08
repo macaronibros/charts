@@ -1,3 +1,76 @@
+.icon-select-wrapper .fieldset-wrapper {
+  margin-top: 10px;
+}
+
+.icon-select-wrapper .form-checkboxes {
+  flex-wrap: wrap;
+}
+
+.icon-select-wrapper input {
+  display: none;
+}
+
+.icon-select-wrapper input:checked + span {
+  fill: #114f5b;
+  color: #114f5b;
+}
+
+.icon-select-wrapper span.field-suffix {
+  margin: 0;
+}
+
+.icon-select-wrapper div.form-type-checkbox.selected {
+  background-color: transparent;
+}
+
+.icon-select-wrapper .form-checkboxes div.form-type-checkbox:nth-child(even) {
+  margin: 0 10px 10px 0;
+}
+
+.icon-select-wrapper span.field-suffix:hover {
+  transform: scale(1);
+  background: transparent;
+  fill: #114f5b;
+  color: #114f5b;
+}
+
+.icon-select-wrapper span.field-prefix {
+  display: none;
+}
+
+.icon-select-wrapper .form-checkboxes .form-type-checkbox.js-form-item {
+  flex: 0 0 auto;
+  border: 0;
+  padding: 0;
+  margin: 0 10px 10px 0;
+}
+
+.field--name-field-charts-data,
+.field--name-field-charts-label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.js .field--name-field-charts-data-ph td.field-multiple-drag {
+  padding-top: 20px;
+}
+
+.field--name-field-charts-data-ph .paragraph-type-top {
+  float: right;
+}
+
+.field--name-field-charts-data-ph .paragraph-type-title {
+  display: none;
+}
+
+.unit-container {
+  display: flex;
+}
+
+.unit-container div {
+  padding-right: 10px;
+}
+
 .bar-chart-admin-wrapper ul {
   list-style: none;
   padding: 0;
@@ -34,24 +107,3 @@
   width: 98%;
   height: 30px;
 }
-
-.field--name-field-unit, .field--name-field-unit > div  {
-  display: inline;
-}
-.field--name-field-unit input , .field--name-field-unit label {
-   display: inline-block;
- }
-
-
-.field--name-field-chart-unit-position ,.field--name-field-chart-unit-position > div , .field--name-field-chart-unit-position label  {
-  display: inline;
-}
-
-.unit-container {
-  display: flex;
-}
-
-.unit-container div {
-  padding-right: 15px;
-}
-

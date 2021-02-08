@@ -19,8 +19,8 @@ use Drupal\file\Entity\File;
 *   ui_limit = {"vertical_bar_chart|default"}
 * )
 */
-class VerticalBarChart extends BarChart
-{
+class VerticalBarChart extends BarChart {
 
   const RESOURCE = '/macaroni-charts/vertical-bar-chart';
+
 }

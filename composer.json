@@ -36,11 +36,13 @@
         ],
         "installer-paths": {
             "libraries/chartjs": ["npm-asset/chart.js"],
+            "libraries/jchartjs-plugin-deferred": ["npm-asset/chartjs-plugin-deferred"],
             "libraries/jquery.visible": ["npm-asset/jquery-visible"]
         },
         "drupal-libraries": {
             "libraries": [
                 {"name": "chartjs", "package": "npm-asset/chart.js"},
+                {"name": "chartjs-plugin-deferred", "package": "npm-asset/chartjs-plugin-deferred"},
                 {"name": "jquery.visible", "package": "npm-asset/jquery-visible"}
             ]
         }

@@ -65,9 +65,9 @@
 
     //generate social widget structure
     $.each(current_data.data, function (index) {
-      var $li = $('<li data-hover="'+ current_data.data.backgroundColor[index][1] +'"></li>');
+      var $li = $('<li style="color:'+current_data.backgroundColor[0]+'" data-hover="'+ current_data.backgroundColor[1] +'" data-color="'+current_data.backgroundColor[0]+'"></li>');
 
-      var element = '<div class="social"><div class="icon">' + current_data.icons[index] + '</div><span class="arrow-down"></span></div>';
+      var element = '<div class="social" style="border-color:'+current_data.borderColor[0]+'"><div class="icon">' + current_data.icons[index] + '</div><span class="arrow-down" style="border-top-color:'+current_data.borderColor[0]+'"></span></div>';
 
       element += '<div class="k-format">' + charts_social._nFormatter(current_data.data[index]) + '</div>';
 
@@ -77,21 +77,60 @@
       $ul.append($li);
       $li.append(element);
 
-      $li.bind('hover', charts_social.onHover);
+      $li.hover( charts_social.onHoverIn , charts_social.onHoverOut);
 
       //setup style based on data
-      charts_social.setUpSocialStyle($ul, current_data, $($ul.children('li')[index]), index);
+      charts_social.setUpSocialStyle($ul, current_data, $li , index);
     });
   }
 
-  charts_social.onHover = function(event) {
+  /**
+   * Hover in
+   * @param event
+   */
+  charts_social.onHoverIn = function(event) {
 
     var $this = $(this);
 
-    $this.css('background-color', $this.data('hover'));
+    var color = $this.data('hover');
+
+    $this.css({
+      'border-color':color,
+      'color': color
+    });
+
+    $this.find('.social').css({
+      'border-color':color,
+      'color': color
+    });
+    $this.find('svg').css('fill', color)
+    $this.find('.arrow-down').css('border-top-color', color)
 
   };
 
+  /**
+   * Hover out
+   * @param event
+   */
+  charts_social.onHoverOut = function(event) {
+
+    var $this = $(this);
+
+    var color = $this.data('color');
+
+    $this.css({
+      'border-color':color,
+      'color': color
+    });
+
+    $this.find('.social').css({
+      'border-color':color,
+      'color': color
+    });
+    $this.find('svg').css('fill', color)
+    $this.find('.arrow-down').css('border-top-color', color)
+
+  };
 
   /**
    * Change Style of current element
@@ -133,14 +172,14 @@
     var $social_item = $current.children('.social');
     var $arrow_down = $social_item.children('.arrow-down');
 
-    //change background color and font-size of li
-    $current.css({'color': current_data.backgroundColor[index], 'font-size': font_number});
+    var backgroundColor = current_data.backgroundColor[0];
+    var borderColor  = current_data.borderColor[0];
+    var borderWidth = current_data.borderWidth;
+
 
     //change style of social item
     $social_item.css({
-      'border-width': current_data.borderWidth,
-      'border-color': current_data.borderColor[index],
-      'color': current_data.borderColor[index],
+      'border-width': borderWidth,
       'width': width,
       'height': height,
       'font-size': font_icon,
@@ -148,7 +187,7 @@
 
     //change style of icon
     $social_item.children('.icon').children().css({
-      'fill': current_data.borderColor[index],
+      'fill': borderColor,
       'width': font_icon,
       'height': font_icon,
     });
@@ -160,8 +199,7 @@
     $arrow_down.css('border-width', border_width);
 
     $arrow_down.css({
-      'border-top-color': current_data.borderColor[index],
-      'bottom': -(current_data.borderWidth + parseInt($arrow_down.css('border-top').split(' ')[0].replace(/[^0-9.]/g, "")) - 1)
+      'bottom': -(borderWidth + parseInt($arrow_down.css('border-top').split(' ')[0].replace(/[^0-9.]/g, "")) - 1)
     });
   }
 

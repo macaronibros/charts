@@ -22,13 +22,6 @@ charts_social:
   js:
     js/social-chart.js: {}
 
-charts_pie:
-  css:
-    theme:
-      css/pie-chart.css: { }
-  js:
-    js/pie-chart.js: {}
-
 charts_bubble:
   css:
     theme:
@@ -49,3 +42,10 @@ charts_bar:
       css/bar-chart.css: { }
   js:
     js/bar-chart.js: {}
+
+charts_circle:
+  css:
+    theme:
+      css/circle-chart.css: { }
+  js:
+    js/circle-chart.js: {}

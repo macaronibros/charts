@@ -68,26 +68,19 @@
     charts_bubble._sortValues(current_data);
 
     $.each(current_data.data, function (index) {
-      var element = '<li class="bubble-item">';
+      var $li = $('<li class="bubble-item"></li>');
 
-      element += '<div class="bubble"><div class="bubble-title">' + current_data.labels[index] + '</div>';
+      var element = '<div class="bubble"><div class="bubble-title">' + current_data.labels[index] + '</div>';
 
-      if (current_data.data[index] > 999) {
-        element += '<div class="k-format"><div class="bubble-number">' + (Math.sign(current_data.data[index]) * ((current_data.data[index] / 1000).toFixed(1))) + '</div>k</div>';
-      } else {
-        var number = current_data.data[index];
-        if(number % 1 !== 0) {
-          element += '<div class="bubble-number">' + number + '</div>'
-        }else{
-          element += '<div class="bubble-number">' + parseFloat(number).toFixed(0) + '</div>'
-        }
-      }
+      element += '<div class="k-format">' + charts_bubble._nFormatter(current_data.data[index]) + '</div>';
 
-      element += '</div></li>';
+      element += '</div>';
 
-      $ul.append(element);
+      $ul.append($li);
 
-      charts_bubble.setUpBubbleStyle($($ul.children('li')[index]), index, current_data);
+      $li.append(element);
+
+      charts_bubble.setUpBubbleStyle($li, index, current_data);
     });
 
     charts_bubble.setUpBubbleWidth($ul, current_data);
@@ -240,7 +233,7 @@
    * current element
    */
   charts_bubble.animateNumbers = function ($element) {
-    $element.find('.bubble-number').each(function () {
+    $element.find('.number').each(function () {
 
       if (charts_bubble.animated[$element.parent().attr('id')]) {
 
@@ -372,6 +365,36 @@
   charts_bubble._countDecimal = function (number) {
     if(Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
+  }
+
+  /**
+   * @param number
+   * Current number
+   * @param digits
+   * Number of digits after ,
+   * @returns {string}
+   * Formatted number
+   * @private
+   */
+  charts_bubble._nFormatter = function (number,digits= 2) {
+
+    var value = [
+      { value: 1, symbol: "" },
+      { value: 1E3, symbol: "K" },
+      { value: 1E6, symbol: "M" },
+      { value: 1E9, symbol: "G" },
+      { value: 1E12, symbol: "T" },
+      { value: 1E15, symbol: "P" },
+      { value: 1E18, symbol: "E" }
+    ];
+    var regExp = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var i = value.length - 1;
+    for (i ; i > 0; i--) {
+      if (number >= value[i].value) {
+        break;
+      }
+    }
+    return '<div class="number">'+(number / value[i].value).toFixed(digits).replace(regExp, "$1")+ '</div>' + value[i].symbol;
   }
 
 

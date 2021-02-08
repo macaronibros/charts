@@ -1,0 +1,48 @@
+.paragraph--type-pie-chart,
+.paragraph--type-doughnut-chart{
+  margin-bottom: 30px;
+}
+canvas.circle-chart-wrapper {
+  margin-top: 30px;
+}
+
+.circle-legend li span {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.circle-legend li:before {
+  display: none;
+}
+
+.circle-legend li .label-item {
+  display: inline;
+  font-weight: 700;
+  color: #4a4a4a;
+  font-size: 16px;
+}
+
+.circle-legend {
+  text-align: center;
+  margin: 40px 0 0;
+}
+.circle-legend ul {
+  display: inline-block;
+  text-align: left;
+}
+
+.circle-legend h3 {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.circle-legend li {
+  display: flex;
+  margin-bottom: 10px;
+}
+.circle-legend li:last-child {
+  margin-bottom: 0;
+}

@@ -61,11 +61,11 @@
   background-size: contain;
 }
 
-.bubble-title, .bubble-number {
+.chart-wrapper-bubble  .bubble-title, .chart-wrapper-bubble  .number {
   font-weight: 700;
   color: #ffffff;
 }
-.bubble-number {
+.chart-wrapper-bubble .number {
   display: inline;
 }
 .bubble-infographics .k-format {

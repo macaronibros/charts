@@ -61,21 +61,15 @@ class SlideChartResource extends ChartResource
       $field_unit = $data_paragraph->get('field_charts_unit')->getValue();
 
       if (!empty($field_unit)) {
-        $data_with_label = [
-          $field_data[0]['value'],
-          $field_unit[0]['value']
-        ];
+        $data['unit'][] = $field_unit[0]['value'];
       }
 
       $field_unit_position = $data_paragraph->get('field_charts_unit_position')->getValue();
 
       if(!empty($field_unit_position[0]['value'])) {
-        $data['labels'][] = ($field_unit_position[0]['value'] == static::LABEL_BEFORE)
-          ? implode(' ', array_reverse($data_with_label))
-          : implode(' ', $data_with_label);
-      }
-      else {
-        $data['labels'][] = $field_data[0]['value'];
+        $data['unit_position'][] = ($field_unit_position[0]['value']);
+      }else {
+        $data['unit_position'][] = "";
       }
 
       $data['data'][] = $field_data[0]['value'];

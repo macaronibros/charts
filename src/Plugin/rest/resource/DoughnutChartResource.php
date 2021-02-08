@@ -10,19 +10,19 @@ use Drupal\taxonomy\Entity\Term;
 use Psr\Log\LoggerInterface;
 
 /**
- * Provides the Pie Chart Resource
+ * Provides the Doughnut Chart Resource
  *
  * @RestResource(
- *   id = "pie_chart_resource",
- *   label = @Translation("Pie Chart Resource"),
+ *   id = "doughnut_chart_resource",
+ *   label = @Translation("Doughnut Chart Resource"),
  *   uri_paths = {
- *     "canonical" = "/macaroni-charts/pie-chart/{paragraph_id}"
+ *     "canonical" = "/macaroni-charts/doughnut-chart/{paragraph_id}"
  *   }
  * )
  */
-class PieChartResource extends CircleChartResource {
+class DoughnutChartResource extends CircleChartResource {
 
-  const TYPE = 'pie_chart';
-  const CHART_TYPE = 'pie';
+  const TYPE = 'doughnut_chart';
+  const CHART_TYPE = 'doughnut';
 
 }

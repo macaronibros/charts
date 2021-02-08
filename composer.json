@@ -41,14 +41,14 @@
         ],
         "installer-paths": {
             "libraries/chartjs": ["bower-asset/chartjs"],
-            "libraries/chartjs.deferred": ["npm-asset/chartjs-plugin-deferred"],
-            "libraries/jquery.visible": ["npm-asset/jquery-visible"]
+            "libraries/chartjs-plugin-deferred": ["npm-asset/chartjs-plugin-deferred"],
+            "libraries/jquery-visible": ["npm-asset/jquery-visible"]
         },
-        "drupal-libraries": {
+        "drupal-library": {
             "libraries": [
                 {"name": "chartjs", "package": "bower-asset/chartjs"},
-                {"name": "chartjs.deferred", "package": "npm-asset/chartjs-plugin-deferred"},
-                {"name": "jquery.visible", "package": "npm-asset/jquery-visible"}
+                {"name": "chartjs-plugin-deferred", "package": "npm-asset/chartjs-plugin-deferred"},
+                {"name": "jquery-visible", "package": "npm-asset/jquery-visible"}
             ]
         }
     }

@@ -108,22 +108,22 @@ function macaroni_charts_library_info_build() {
     ],
   ];
 
-  $libraries_path = 'libraries/chartjs.deferred';
+  $libraries_path = 'libraries/chartjs-plugin-deferred';
   if (\Drupal::hasService('library.libraries_directory_file_finder')) {
-    $libraries_path = \Drupal::service('library.libraries_directory_file_finder')->find('chartjs.deferred');
+    $libraries_path = \Drupal::service('library.libraries_directory_file_finder')->find('chartjs-plugin-deferred');
   }
   elseif (function_exists('libraries_get_path')) {
-    $libraries_path = libraries_get_path('chartjs.deferred');
+    $libraries_path = libraries_get_path('chartjs-plugin-deferred');
   }
 
   $libraries['chartjs']['js']['/' . $libraries_path . '/dist/chartjs-plugin-deferred.min.js'] = ['minified' => TRUE];
 
-  $libraries_path = 'libraries/jquery.visible';
+  $libraries_path = 'libraries/jquery-visible';
   if (\Drupal::hasService('library.libraries_directory_file_finder')) {
-    $libraries_path = \Drupal::service('library.libraries_directory_file_finder')->find('jquery.visible');
+    $libraries_path = \Drupal::service('library.libraries_directory_file_finder')->find('jquery-visible');
   }
   elseif (function_exists('libraries_get_path')) {
-    $libraries_path = libraries_get_path('jquery.visible');
+    $libraries_path = libraries_get_path('jquery-visible');
   }
 
   $libraries['jquery.visible'] = [

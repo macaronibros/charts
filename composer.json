@@ -29,22 +29,23 @@
         "drupal/icon_select": "^2",
         "composer/installers": "~1.0 || ~2.0",
         "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
-        "chartjs/chartjs": "~2",
+        "bower-asset/chartjs": "^2",
 	    "npm-asset/chartjs-plugin-deferred": "~1",
         "npm-asset/jquery-visible": "~1"
     },
     "extra": {
         "installer-types": [
-            "npm-asset"
+            "npm-asset",
+            "bower-asset"
         ],
         "installer-paths": {
-            "libraries/chartjs": ["chartjs/chartjs"],
+            "libraries/chartjs": ["bower-asset/chartjs"],
             "libraries/chartjs.deferred": ["npm-asset/chartjs-plugin-deferred"],
             "libraries/jquery.visible": ["npm-asset/jquery-visible"]
         },
         "drupal-libraries": {
             "libraries": [
-                {"name": "chartjs", "package": "chartjs/chartjs"},
+                {"name": "chartjs", "package": "bower-asset/chartjs"},
                 {"name": "chartjs.deferred", "package": "npm-asset/chartjs-plugin-deferred"},
                 {"name": "jquery.visible", "package": "npm-asset/jquery-visible"}
             ]

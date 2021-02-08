@@ -1,0 +1,11 @@
+<?php
+/**
+ * hook_uninstall
+ */
+function macaroni_charts_uninstall() {
+
+  \Drupal::database()->delete('config')
+    ->condition('name', 'macaroni_charts.settings', '=');
+
+  drupal_flush_all_caches();
+}

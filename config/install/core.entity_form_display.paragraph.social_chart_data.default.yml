@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.social_chart_data.field_charts_data
+    - field.field.paragraph.social_chart_data.field_charts_icon_ref
+    - field.field.paragraph.social_chart_data.field_charts_label
+    - paragraphs.paragraphs_type.social_chart_data
+  module:
+    - icon_select
+id: paragraph.social_chart_data.default
+targetEntityType: paragraph
+bundle: social_chart_data
+mode: default
+content:
+  field_charts_data:
+    weight: 2
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_charts_icon_ref:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: icon_select_widget_default
+    region: content
+  field_charts_label:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,84 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_data_ph
+    - paragraphs.paragraphs_type.doughnut_chart
+    - paragraphs.paragraphs_type.doughnut_chart_data
+  module:
+    - entity_reference_revisions
+id: paragraph.doughnut_chart.field_charts_data_ph
+field_name: field_charts_data_ph
+entity_type: paragraph
+bundle: doughnut_chart
+label: Data
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      doughnut_chart_data: doughnut_chart_data
+    target_bundles_drag_drop:
+      author:
+        weight: 20
+        enabled: false
+      authors:
+        weight: 21
+        enabled: false
+      bubble_chart:
+        weight: 22
+        enabled: false
+      bubble_chart_data:
+        weight: 23
+        enabled: false
+      doughnut_chart:
+        weight: 24
+        enabled: false
+      doughnut_chart_data:
+        enabled: true
+        weight: 25
+      faqs:
+        weight: 26
+        enabled: false
+      faqs_title:
+        weight: 27
+        enabled: false
+      horizontal_bar_chart:
+        weight: 28
+        enabled: false
+      horizontal_bar_stacked_chart:
+        weight: 29
+        enabled: false
+      pie_chart:
+        weight: 30
+        enabled: false
+      pie_chart_data:
+        weight: 31
+        enabled: false
+      single_column:
+        weight: 32
+        enabled: false
+      slide_chart:
+        weight: 33
+        enabled: false
+      slide_chart_data:
+        weight: 34
+        enabled: false
+      social_chart:
+        weight: 35
+        enabled: false
+      social_chart_data:
+        weight: 36
+        enabled: false
+      vertical_bar_chart:
+        weight: 37
+        enabled: false
+      vertical_bar_stacked_chart:
+        weight: 38
+        enabled: false
+field_type: entity_reference_revisions

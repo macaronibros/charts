@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_label
+    - paragraphs.paragraphs_type.pie_chart_data
+id: paragraph.pie_chart_data.field_charts_label
+field_name: field_charts_label
+entity_type: paragraph
+bundle: pie_chart_data
+label: Label
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

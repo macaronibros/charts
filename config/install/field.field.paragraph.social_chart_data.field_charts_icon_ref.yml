@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_icon_ref
+    - paragraphs.paragraphs_type.social_chart_data
+    - taxonomy.vocabulary.icons
+id: paragraph.social_chart_data.field_charts_icon_ref
+field_name: field_charts_icon_ref
+entity_type: paragraph
+bundle: social_chart_data
+label: Icon
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      icons: icons
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

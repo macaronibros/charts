@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - macaroni_charts
+    - serialization
+    - user
+id: doughnut_chart_resource
+plugin_id: doughnut_chart_resource
+granularity: method
+configuration:
+  GET:
+    supported_formats:
+      - json
+    supported_auth:
+      - cookie

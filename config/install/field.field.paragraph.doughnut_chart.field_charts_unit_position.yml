@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_unit_position
+    - paragraphs.paragraphs_type.doughnut_chart
+  module:
+    - options
+id: paragraph.doughnut_chart.field_charts_unit_position
+field_name: field_charts_unit_position
+entity_type: paragraph
+bundle: doughnut_chart
+label: 'Unit Position'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

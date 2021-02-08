@@ -1,0 +1,16 @@
+name: 'Macaroni Charts'
+description: 'Provides Charts Widgets as Paragraphs'
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - entity_reference_revisions
+  - field
+  - metatag
+  - options
+  - paragraphs
+  - taxonomy
+  - icon_select
+  - select2
+version: 8.x-1.0
+configure: macaroni_charts.settings

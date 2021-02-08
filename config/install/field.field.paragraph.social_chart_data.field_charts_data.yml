@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_data
+    - paragraphs.paragraphs_type.social_chart_data
+id: paragraph.social_chart_data.field_charts_data
+field_name: field_charts_data
+entity_type: paragraph
+bundle: social_chart_data
+label: Data
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: !!float 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

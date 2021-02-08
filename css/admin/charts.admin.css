@@ -1,0 +1,57 @@
+.bar-chart-admin-wrapper ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0 0;
+}
+.bar-chart-admin-wrapper ul li {
+  position: relative;
+  border: 1px solid #bfbfba;
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 1%;
+  width: 32%;
+}
+.bar-chart-admin-wrapper ul li h5 {
+  color: #333;
+  background-color: #f5f5f2;
+  padding: 5px 10px;
+  display: block;
+  border-bottom: 1px solid #bfbfba;
+  margin: 0;
+}
+
+.bar-chart-admin-wrapper ul li .inner-wrapper {
+  padding: 10px;
+}
+
+.bar-chart-admin-wrapper ul li .inner-wrapper label {
+  padding-bottom: 5px;
+}
+
+.bar-chart-admin-wrapper ul li .inner-wrapper input {
+  width: 98%;
+  height: 30px;
+}
+
+.field--name-field-unit, .field--name-field-unit > div  {
+  display: inline;
+}
+.field--name-field-unit input , .field--name-field-unit label {
+   display: inline-block;
+ }
+
+
+.field--name-field-chart-unit-position ,.field--name-field-chart-unit-position > div , .field--name-field-chart-unit-position label  {
+  display: inline;
+}
+
+.unit-container {
+  display: flex;
+}
+
+.unit-container div {
+  padding-right: 15px;
+}
+

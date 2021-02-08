@@ -1,0 +1,5 @@
+macaroni_charts.settings:
+  title: 'Macaroni Charts'
+  description: 'Settings for Macaroni Charts'
+  parent: system.admin_config_ui
+  route_name: charts.settings

@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.slide_chart.field_charts_data_ph
+    - field.field.paragraph.slide_chart.field_charts_style
+    - field.field.paragraph.slide_chart.field_charts_title
+    - paragraphs.paragraphs_type.slide_chart
+  module:
+    - paragraphs
+id: paragraph.slide_chart.default
+targetEntityType: paragraph
+bundle: slide_chart
+mode: default
+content:
+  field_charts_data_ph:
+    weight: 2
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+  field_charts_style:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_charts_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

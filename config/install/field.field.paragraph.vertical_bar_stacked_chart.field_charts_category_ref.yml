@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_category_ref
+    - paragraphs.paragraphs_type.vertical_bar_stacked_chart
+    - taxonomy.vocabulary.chart_categories
+id: paragraph.vertical_bar_stacked_chart.field_charts_category_ref
+field_name: field_charts_category_ref
+entity_type: paragraph
+bundle: vertical_bar_stacked_chart
+label: Category(s)
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      chart_categories: chart_categories
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

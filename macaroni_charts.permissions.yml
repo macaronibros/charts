@@ -1,0 +1,3 @@
+administer macaroni charts:
+  title: 'Administer Macaroni Charts'
+  description: 'Configuration page for Macaroni Charts. Allows to setup styles for charts.'

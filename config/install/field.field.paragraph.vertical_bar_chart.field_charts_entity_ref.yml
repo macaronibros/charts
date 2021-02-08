@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_entity_ref
+    - paragraphs.paragraphs_type.vertical_bar_chart
+    - taxonomy.vocabulary.chart_entities
+id: paragraph.vertical_bar_chart.field_charts_entity_ref
+field_name: field_charts_entity_ref
+entity_type: paragraph
+bundle: vertical_bar_chart
+label: Entity(s)
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      chart_entities: chart_entities
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

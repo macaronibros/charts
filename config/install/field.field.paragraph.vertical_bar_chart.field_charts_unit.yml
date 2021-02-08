@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_unit
+    - paragraphs.paragraphs_type.vertical_bar_chart
+id: paragraph.vertical_bar_chart.field_charts_unit
+field_name: field_charts_unit
+entity_type: paragraph
+bundle: vertical_bar_chart
+label: Unit
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,115 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.pie_chart.field_charts_data_ph
+    - field.field.paragraph.pie_chart.field_charts_legend_title
+    - field.field.paragraph.pie_chart.field_charts_style
+    - field.field.paragraph.pie_chart.field_charts_title
+    - field.field.paragraph.pie_chart.field_charts_unit
+    - field.field.paragraph.pie_chart.field_charts_unit_position
+    - paragraphs.paragraphs_type.pie_chart
+  module:
+    - ds
+third_party_settings:
+  ds:
+    layout:
+      id: ds_1col
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        label: ''
+        wrappers:
+          ds_content: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+        classes:
+          layout_class: {  }
+    regions:
+      ds_content:
+        - field_charts_title
+        - macaroni_pie_chart
+    fields:
+      macaroni_pie_chart:
+        plugin_id: macaroni_pie_chart
+        weight: 1
+        label: hidden
+        formatter: default
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+id: paragraph.pie_chart.default
+targetEntityType: paragraph
+bundle: pie_chart
+mode: default
+content:
+  field_charts_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi: true
+            fi-el: h3
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi-def-at: false
+    type: string
+    region: ds_content
+hidden:
+  field_charts_data_ph: true
+  field_charts_legend_title: true
+  field_charts_style: true
+  field_charts_unit: true
+  field_charts_unit_position: true
+  search_api_excerpt: true

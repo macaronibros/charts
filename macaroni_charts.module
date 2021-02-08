@@ -1,0 +1,132 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function macaroni_charts_field_widget_entity_reference_paragraphs_form_alter(&$element, &$form_state, $context) {
+
+  //add class to paragraph form element to easily recognize them
+  $element['subform']['#attributes']['class'][] = str_replace('_', '-', $element['#paragraph_type']);
+  $element['#attached']['library'][] = 'macaroni_charts/charts_admin';
+
+  switch($element['#paragraph_type']) {
+
+    case 'vertical_bar_chart':
+    case 'vertical_bar_stacked_chart':
+    case 'horizontal_bar_chart':
+    case 'horizontal_bar_stacked_chart':
+      $element['subform']['#attributes']['class'][] = 'bar-chart';
+      $element['#attached']['library'][] = 'macaroni_charts/charts_admin_bar';
+      break;
+
+    case 'pie_chart_data':
+    case 'social_chart_data':
+    case 'slide_chart_data':
+    case 'bubble_chart_data':
+      $element['subform']['field_charts_data_ph']['widget']['add_more']['add_more_button_'.$element['#paragraph_type']]['#value'] = t('Add Data');
+      // remove top label (Social Chart: Data...)
+      $element['top']['paragraph_type_title']['info']['#markup'] = '';
+      //attach css library
+      break;
+
+  }
+
+}
+
+/**
+ * Implements hook_field_widget_WIDGET_TYPE_form_alter().
+ */
+function macaroni_charts_field_widget_icon_select_widget_default_form_alter(&$element, &$form_state, $context) {
+
+  if(in_array('field_charts_data_ph', $context['form']['#parents'])) {
+    //change the container type
+    $element['#type'] = 'container';
+  }
+}
+
+/**
+ *  Implements hook_theme().
+ */
+function macaroni_charts_theme($existing, $type, $theme, $path) {
+  return [
+    'social_chart' => [
+      'variables' => [
+        'id' => [],
+      ],
+    ],
+    'pie_chart' => [
+      'variables' => [
+        'id' => [],
+      ],
+    ],
+    'bubble_chart' => [
+      'variables' => [
+        'id' => [],
+      ],
+    ],
+    'slide_chart' => [
+      'variables' => [
+        'id' => [],
+      ],
+    ],
+    'bar_chart' => [
+      'variables' => [
+        'id' => [],
+        'resource' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_library_info_build().
+ */
+function macaroni_charts_library_info_build() {
+
+  $libraries_path = 'libraries/chartjs';
+  if (\Drupal::hasService('library.libraries_directory_file_finder')) {
+    $libraries_path = \Drupal::service('library.libraries_directory_file_finder')->find('chartjs');
+  }
+  elseif (function_exists('libraries_get_path')) {
+    $libraries_path = libraries_get_path('chartjs');
+  }
+
+
+  $libraries['chartjs'] = [
+    'js' => [
+      '/' . $libraries_path . '/dist/Chart.min.js' => ['minified' => TRUE],
+    ],
+    'css' => [
+      'component' => [
+        '/' . $libraries_path . '/dist/Chart.min.css' => [],
+      ],
+    ],
+  ];
+
+  $libraries_path = 'libraries/jquery.visible';
+  if (\Drupal::hasService('library.libraries_directory_file_finder')) {
+    $libraries_path = \Drupal::service('library.libraries_directory_file_finder')->find('jquery.visible');
+  }
+  elseif (function_exists('libraries_get_path')) {
+    $libraries_path = libraries_get_path('jquery.visible');
+  }
+
+  $libraries['jquery.visible'] = [
+    'js' => [
+      '/' . $libraries_path . '/jquery.visible.min.js' => ['minified' => TRUE],
+    ],
+  ];
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_page_attachments
+ */
+function macaroni_charts_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'macaroni_charts/chartjs';
+  $attachments['#attached']['library'][] = 'macaroni_charts/jquery.visible';
+}

@@ -1,0 +1,51 @@
+charts_admin:
+  css:
+    theme:
+      css/admin/charts.admin.css: {}
+
+charts_admin_settings:
+  css:
+    theme:
+      css/admin/settings.admin.css: {}
+
+charts_admin_bar:
+  js:
+    js/admin/bar-chart.admin.js: {}
+  dependencies:
+    - select2/select2.min
+    - core/sortable
+
+charts_social:
+  css:
+    theme:
+      css/social-chart.css: {}
+  js:
+    js/social-chart.js: {}
+
+charts_pie:
+  css:
+    theme:
+      css/pie-chart.css: { }
+  js:
+    js/pie-chart.js: {}
+
+charts_bubble:
+  css:
+    theme:
+      css/bubble-chart.css: {}
+  js:
+    js/bubble-chart.js: {}
+
+charts_slide:
+  css:
+    theme:
+      css/slide-chart.css: {}
+  js:
+    js/slide-chart.js: {}
+
+charts_bar:
+  css:
+    theme:
+      css/bar-chart.css: { }
+  js:
+    js/bar-chart.js: {}

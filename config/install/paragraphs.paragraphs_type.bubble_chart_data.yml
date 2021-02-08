@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: bubble_chart_data
+label: 'Bubble Chart: Data'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

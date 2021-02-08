@@ -1,0 +1,15 @@
+style:
+  borderWidth: 1
+options:
+  deferred:
+    delay: 500
+  animation:
+    duration: 3000
+    easing: "linear"
+  legend:
+    display: false
+    position: 'bottom'
+    align: 'start'
+    labels:
+      usePointStyle: 'true'
+      pointStyle: 'circle'

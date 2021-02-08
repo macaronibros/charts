@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.bubble_chart_data.field_charts_data
+    - field.field.paragraph.bubble_chart_data.field_charts_label
+    - paragraphs.paragraphs_type.bubble_chart_data
+id: paragraph.bubble_chart_data.default
+targetEntityType: paragraph
+bundle: bubble_chart_data
+mode: default
+content:
+  field_charts_data:
+    weight: 1
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_charts_label:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true

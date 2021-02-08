@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_style
+    - paragraphs.paragraphs_type.vertical_bar_stacked_chart
+  module:
+    - options
+id: paragraph.vertical_bar_stacked_chart.field_charts_style
+field_name: field_charts_style
+entity_type: paragraph
+bundle: vertical_bar_stacked_chart
+label: Style
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,64 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.horizontal_bar_stacked_chart.field_charts_aggregated_data
+    - field.field.paragraph.horizontal_bar_stacked_chart.field_charts_category_ref
+    - field.field.paragraph.horizontal_bar_stacked_chart.field_charts_entity_ref
+    - field.field.paragraph.horizontal_bar_stacked_chart.field_charts_style
+    - field.field.paragraph.horizontal_bar_stacked_chart.field_charts_title
+    - field.field.paragraph.horizontal_bar_stacked_chart.field_charts_unit
+    - field.field.paragraph.horizontal_bar_stacked_chart.field_charts_unit_position
+    - paragraphs.paragraphs_type.horizontal_bar_stacked_chart
+  module:
+    - ds
+id: paragraph.horizontal_bar_stacked_chart.preview
+targetEntityType: paragraph
+bundle: horizontal_bar_stacked_chart
+mode: preview
+content:
+  field_charts_title:
+    weight: 0
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: string
+    region: content
+hidden:
+  field_charts_aggregated_data: true
+  field_charts_category_ref: true
+  field_charts_entity_ref: true
+  field_charts_style: true
+  field_charts_unit: true
+  field_charts_unit_position: true
+  search_api_excerpt: true

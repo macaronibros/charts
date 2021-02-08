@@ -1,0 +1,47 @@
+.paragraph--type-vertical-bar-chart {
+  margin-bottom: 30px;
+}
+.bar-chart-legend li span {
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.bar-chart-legend li:before {
+  display: none;
+}
+
+.bar-chart-wrapper {
+  margin-top: 30px;
+}
+
+.bar-chart-legend li .label-item {
+  display: inline;
+  font-weight: 700;
+  color: #4a4a4a;
+  font-size: 16px;
+}
+
+.bar-chart-legend {
+  text-align: center;
+  margin: 40px 0;
+}
+.bar-chart-legend ul {
+  display: inline-block;
+  text-align: left;
+  column-count: 2;
+}
+
+.bar-chart-legend h3 {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.bar-chart-legend li {
+  display: flex;
+  margin-bottom: 10px;
+}
+.bar-chart-legend li:last-child {
+  margin-bottom: 0;
+}

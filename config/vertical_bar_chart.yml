@@ -1,0 +1,18 @@
+style:
+options:
+  deferred:
+    delay: 500
+  animation:
+    duration: 3000
+    easing: "linear"
+  scales:
+    xAxes:
+      - gridLines:
+          display: false
+    yAxes:
+      - ticks:
+          beginAtZero: true
+  responsive: true
+  legend:
+    display: false
+    position: 'bottom'

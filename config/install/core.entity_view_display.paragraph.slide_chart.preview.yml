@@ -1,0 +1,56 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.slide_chart.field_charts_data_ph
+    - field.field.paragraph.slide_chart.field_charts_style
+    - field.field.paragraph.slide_chart.field_charts_title
+    - paragraphs.paragraphs_type.slide_chart
+  module:
+    - ds
+id: paragraph.slide_chart.preview
+targetEntityType: paragraph
+bundle: slide_chart
+mode: preview
+content:
+  field_charts_title:
+    weight: 0
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      ds:
+        ft:
+          id: expert
+          settings:
+            lb: ''
+            prefix: ''
+            lbw-el: ''
+            lbw-cl: ''
+            lbw-at: ''
+            ow-el: ''
+            ow-cl: ''
+            ow-at: ''
+            fis-el: ''
+            fis-cl: ''
+            fis-at: ''
+            fi-el: ''
+            fi-cl: ''
+            fi-at: ''
+            suffix: ''
+            lbw: false
+            lb-col: false
+            ow: false
+            ow-def-at: false
+            ow-def-cl: false
+            fis: false
+            fis-def-at: false
+            fi: false
+            fi-def-at: false
+    type: string
+    region: content
+hidden:
+  field_charts_data_ph: true
+  field_charts_style: true
+  search_api_excerpt: true

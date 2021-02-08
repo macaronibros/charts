@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Chart categories'
+vid: chart_categories
+description: ''
+weight: 0

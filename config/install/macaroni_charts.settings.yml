@@ -1,0 +1,28 @@
+colors: 10
+styles: '2'
+style_1:
+  name: 'Default Style'
+  colors:
+    color-0: '#103338'
+    color-1: '#0c3840'
+    color-2: '#145d6b'
+    color-3: '#1c8396'
+    color-4: '#24a8c1'
+    color-5: '#3ec1db'
+    color-6: '#69cfe3'
+    color-7: '#94ddeb'
+    color-8: '#bfeaf3'
+    color-9: '#eaf8fb'
+style_2:
+  name: 'Theme 2'
+  colors:
+    color-0: '#ee6d6d'
+    color-1: '#366f7d'
+    color-2: '#49ab6c'
+    color-3: '#5aaec4'
+    color-4: '#c76666'
+    color-5: '#000000'
+    color-6: '#000000'
+    color-7: '#000000'
+    color-8: '#000000'
+    color-9: '#000000'

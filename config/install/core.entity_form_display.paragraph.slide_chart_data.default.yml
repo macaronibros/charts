@@ -1,0 +1,78 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.slide_chart_data.field_charts_data
+    - field.field.paragraph.slide_chart_data.field_charts_icon_ref
+    - field.field.paragraph.slide_chart_data.field_charts_label
+    - field.field.paragraph.slide_chart_data.field_charts_unit
+    - field.field.paragraph.slide_chart_data.field_charts_unit_position
+    - paragraphs.paragraphs_type.slide_chart_data
+  module:
+    - field_group
+    - icon_select
+third_party_settings:
+  field_group:
+    group_unit:
+      children:
+        - field_charts_unit
+        - field_charts_unit_position
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: unit-container
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Unit
+id: paragraph.slide_chart_data.default
+targetEntityType: paragraph
+bundle: slide_chart_data
+mode: default
+content:
+  field_charts_data:
+    weight: 5
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: number
+    region: content
+  field_charts_icon_ref:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: icon_select_widget_default
+    region: content
+  field_charts_label:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_charts_unit:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_charts_unit_position:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

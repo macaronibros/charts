@@ -1,0 +1,101 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.doughnut_chart.field_charts_center_text
+    - field.field.paragraph.doughnut_chart.field_charts_data_ph
+    - field.field.paragraph.doughnut_chart.field_charts_legend_title
+    - field.field.paragraph.doughnut_chart.field_charts_style
+    - field.field.paragraph.doughnut_chart.field_charts_title
+    - field.field.paragraph.doughnut_chart.field_charts_unit
+    - field.field.paragraph.doughnut_chart.field_charts_unit_position
+    - paragraphs.paragraphs_type.doughnut_chart
+  module:
+    - field_group
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_unit:
+      children:
+        - field_charts_unit
+        - field_charts_unit_position
+      parent_name: ''
+      weight: 4
+      format_type: html_element
+      region: content
+      format_settings:
+        id: ''
+        classes: unit-container
+        element: div
+        show_label: false
+        label_element: h3
+        label_element_classes: ''
+        required_fields: true
+        attributes: ''
+        effect: none
+        speed: fast
+      label: Unit
+id: paragraph.doughnut_chart.default
+targetEntityType: paragraph
+bundle: doughnut_chart
+mode: default
+content:
+  field_charts_center_text:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_charts_data_ph:
+    weight: 5
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: doughnut_chart_data
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+    region: content
+  field_charts_legend_title:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_charts_style:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_charts_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_charts_unit:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_charts_unit_position:
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+hidden:
+  created: true
+  status: true

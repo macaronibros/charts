@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_unit_position
+    - paragraphs.paragraphs_type.horizontal_bar_stacked_chart
+  module:
+    - options
+id: paragraph.horizontal_bar_stacked_chart.field_charts_unit_position
+field_name: field_charts_unit_position
+entity_type: paragraph
+bundle: horizontal_bar_stacked_chart
+label: 'Unit Position'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: before
+default_value_callback: ''
+settings: {  }
+field_type: list_string

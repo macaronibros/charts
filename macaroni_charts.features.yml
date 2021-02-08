@@ -1,0 +1,5 @@
+excluded:
+  - metatag.metatag_defaults.node__blog
+  - metatag.metatag_defaults.node__project
+  - metatag.metatag_defaults.taxonomy_term__organizations
+required: true

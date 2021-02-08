@@ -1,0 +1,7 @@
+charts.settings:
+  path: '/admin/config/user-interface/macaroni-charts'
+  defaults:
+    _form: '\Drupal\macaroni_charts\Form\MacaroniChartsSettingsForm'
+    _title: 'Macaroni Charts Settings'
+  requirements:
+    _permission: 'administer macaroni charts'

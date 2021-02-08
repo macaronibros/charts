@@ -1,0 +1,11 @@
+.macaroni-charts-admin-settings .form-type-color {
+  display: inline-block;
+}
+
+.macaroni-charts-admin-settings .form-type-color input {
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  height: 30px;
+}

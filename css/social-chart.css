@@ -1,0 +1,76 @@
+.paragraph--type-social-chart {
+  margin-bottom: 30px;
+}
+.chart-wrapper-social {
+  margin-top: 30px;
+}
+.chart-wrapper-social .social-infographics {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin-left: 0;
+}
+.chart-wrapper-social .social-infographics li {
+  flex: 1 1 0;
+  text-align: center;
+  margin-right: 10px;
+}
+.chart-wrapper-social .social-infographics li:last-child {
+  margin-right:0;
+}
+.chart-wrapper-social .social-infographics li:before {
+  display: none;
+}
+.chart-wrapper-social .social-infographics .k-format .number {
+  display: inline;
+}
+.chart-wrapper-social .social-infographics .social {
+  position: relative;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  font-size: 32px;
+  border-radius: 50%;
+}
+.chart-wrapper-social .social-infographics .social .arrow-down {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid;
+  transform: translateX(-50%);
+}
+
+.chart-wrapper-social .social-infographics .social svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.chart-wrapper-social .social-infographics .social:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.paragraph--type-social-chart h2 {
+  margin-bottom: 30px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .chart-wrapper-social .social-infographics {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .paragraph--type-social-chart h2 {
+    font-size: 34px;
+  }
+}

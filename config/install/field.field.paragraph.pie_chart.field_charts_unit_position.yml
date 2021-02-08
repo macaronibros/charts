@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_charts_unit_position
+    - paragraphs.paragraphs_type.pie_chart
+  module:
+    - options
+id: paragraph.pie_chart.field_charts_unit_position
+field_name: field_charts_unit_position
+entity_type: paragraph
+bundle: pie_chart
+label: 'Unit Position'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: before
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: slide_chart
+label: 'Slide Chart'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

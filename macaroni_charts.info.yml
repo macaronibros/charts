@@ -11,5 +11,6 @@ dependencies:
   - taxonomy
   - icon_select
   - select2
+  - ds
 version: 8.x-1.0
 configure: macaroni_charts.settings

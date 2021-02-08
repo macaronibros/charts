@@ -24,10 +24,13 @@
         }
     },
     "require": {
+        "drupal/paragraphs": "^1.12",
+        "drupal/select2": "^1.12",
+        "drupal/icon_select": "^2",
         "composer/installers": "~1.0 || ~2.0",
         "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
-        "npm-asset/chart.js": "~2",
-	"npm-asset/chartjs-plugin-deferred": "~1",
+        "npm-asset/chart.js": "^2",
+	    "npm-asset/chartjs-plugin-deferred": "~1",
         "npm-asset/jquery-visible": "~1"
     },
     "extra": {

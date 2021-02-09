@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
  *   id = "doughnut_chart_resource",
  *   label = @Translation("Doughnut Chart Resource"),
  *   uri_paths = {
- *     "canonical" = "/macaroni-charts/doughnut-chart/{paragraph_id}"
+ *     "canonical" = "/macaroni-charts/doughnut-chart/{id}"
  *   }
  * )
  */

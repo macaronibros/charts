@@ -17,7 +17,7 @@ use Psr\Log\LoggerInterface;
  *   id = "social_chart_resource",
  *   label = @Translation("Social Chart Resource"),
  *   uri_paths = {
- *     "canonical" = "/macaroni-charts/social-chart/{paragraph_id}"
+ *     "canonical" = "/macaroni-charts/social-chart/{id}"
  *   }
  * )
  */

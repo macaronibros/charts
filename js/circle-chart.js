@@ -1,7 +1,7 @@
 (function ($) {
   "use strict";
 
-  window.charts_circle = {};
+  window.chartsCircle = {};
 
 
   /**
@@ -18,7 +18,7 @@
         var centerConfig = chart.config.options.elements.center;
         var fontStyle = centerConfig.fontStyle || 'Arial';
         var txt = centerConfig.text;
-        if (charts_circle._isMobile()) {
+        if (chartsCircle._isMobile()) {
           txt = '';
         } else {
           txt = centerConfig.text
@@ -100,7 +100,7 @@
   /**
    * Init
    */
-  charts_circle.init = function () {
+  chartsCircle.init = function () {
 
     var $wrappers = $('.circle-chart-wrapper');
 
@@ -111,7 +111,7 @@
         var endpoint = $(element).data('endpoint');
         var $canvas = $(element).attr('id', 'circle-chart-wrapper-' + index);
 
-        charts_circle.createWidget(endpoint, $canvas, index);
+        chartsCircle.createWidget(endpoint, $canvas, index);
 
       });
     }
@@ -129,7 +129,7 @@
    * bubble chart canvas index
    */
 
-  charts_circle.createWidget = function (url, $canvas, index) {
+  chartsCircle.createWidget = function (url, $canvas, index) {
 
     $.get({
       url: url,
@@ -139,20 +139,20 @@
 
         //set custom tooltip with unit
         if (data.data.datasets[0].hasOwnProperty('unit')) {
-          charts_circle.setUnit(data);
+          chartsCircle.setUnit(data);
         }
 
-        charts_circle.setCustomLegend(data);
+        chartsCircle.setCustomLegend(data);
 
         var chart = new Chart($canvas, data);
 
         //set custom legend Wrapper
         $canvas.parent().append('<div class="circle-legend" id="circle-legend-' + index + '"></div>')
 
-        var legend = $('#circle-legend-' + index);
+        var $legend = $('#circle-legend-' + index);
 
         //CHARTJS generate legend Function
-        legend.html(chart.generateLegend());
+        $legend.html(chart.generateLegend());
 
       }
     ).fail(function () {
@@ -165,7 +165,7 @@
    * @param data (JSON)
    * data from endpoint
    */
-  charts_circle.setCustomLegend = function (data) {
+  chartsCircle.setCustomLegend = function (data) {
     Object.assign(data.options, {
       'legendCallback': function (chart) {
         var text = [];
@@ -192,7 +192,7 @@
    * @param data (JSON)
    * data from endpoint
    */
-  charts_circle.setUnit = function (data) {
+  chartsCircle.setUnit = function (data) {
     data.options.tooltips = {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -219,7 +219,7 @@
    * @returns {boolean}
    * @private
    */
-  charts_circle._isMobile = function () {
+  chartsCircle._isMobile = function () {
     return $(window).width() <= 1024
   }
 
@@ -235,7 +235,7 @@
     attach: function (context, settings) {
 
       if (context === window.document) {
-        charts_circle.init();
+        chartsCircle.init();
       }
     }
   };

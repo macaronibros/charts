@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
  *   id = "bubble_chart_resource",
  *   label = @Translation("Bubble Chart Resource"),
  *   uri_paths = {
- *     "canonical" = "/macaroni-charts/bubble-chart/{paragraph_id}"
+ *     "canonical" = "/macaroni-charts/bubble-chart/{id}"
  *   }
  * )
  */

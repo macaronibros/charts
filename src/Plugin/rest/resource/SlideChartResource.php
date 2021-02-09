@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
  *   id = "slide_chart_resource",
  *   label = @Translation("Slide Chart Resource"),
  *   uri_paths = {
- *     "canonical" = "/macaroni-charts/slide-chart/{paragraph_id}"
+ *     "canonical" = "/macaroni-charts/slide-chart/{id}"
  *   }
  * )
  */
@@ -25,7 +25,6 @@ class SlideChartResource extends ChartResource
 
 
   const TYPE = 'slide_chart';
-  const LABEL_BEFORE = 'before';
   const MAX_WORDS = 18;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition, array $serializer_formats, LoggerInterface $logger)

@@ -16,7 +16,7 @@ use Psr\Log\LoggerInterface;
  *   id = "pie_chart_resource",
  *   label = @Translation("Pie Chart Resource"),
  *   uri_paths = {
- *     "canonical" = "/macaroni-charts/pie-chart/{paragraph_id}"
+ *     "canonical" = "/macaroni-charts/pie-chart/{id}"
  *   }
  * )
  */

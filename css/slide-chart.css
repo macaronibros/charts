@@ -5,7 +5,8 @@
   margin-bottom: 30px;
 }
 
-.chart-wrapper-slide .slide-infographics{
+.chart-wrapper-slide .slide-infographics {
+  width: 100%;
   margin-left: 0;
   padding: 0;
 }
@@ -15,6 +16,7 @@
 .slide-infographics .slide-item {
   display: flex;
   flex-wrap: nowrap;
+  width: 100%;
   margin-bottom: 20px;
   position: relative;
 }
@@ -26,63 +28,64 @@
 }
 .slide-infographics .slide-item .slide-info {
   position: relative;
-  height: 100px;
+  width: 50%;
   display: flex;
   align-items: center;
   color: white;
-  margin-left: -50px;
-  padding-left: 70px;
+  margin-left: -5%;
+  padding-left: calc(5% + 20px);
   font-size: 16px;
   z-index: 1;
 }
-.slide-infographics .slide-item .slide-info .triangle-right {
-  position: absolute;
-  top: 0;
-  right: -50px;
+.slide-infographics .slide-item .triangle {
+  position: relative;
   width: 0;
   height: 0;
-  border-top: 50px solid transparent;
-  border-bottom: 50px solid transparent;
-  border-left: 50px solid #090979;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: #090979;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  z-index: 1;
 }
 .slide-infographics .slide-item .number {
   position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  display: table;
   background: #090979;
-  height: 80px;
-  margin-top: 10px;
-  padding-left: 70px;
   font-weight: 700;
   z-index: 0;
   color: white;
-  width: 250px;
-  left: 50px;
+  min-width: 20%;
+  padding-left: calc(5% + 20px);
 }
 .slide-infographics .slide-item .number .number-item {
-  display: inline;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: table-cell;
+  vertical-align: middle;
   font-size: 18px;
-  width: 117px;
-  padding-left: 5px;
+  width: 100%;
 }
-.slide-infographics .slide-item .number .triangle-right {
+.slide-infographics .slide-item .number .triangle {
   position: absolute;
   top: 0;
-  right: -40px;
   width: 0;
   height: 0;
-  border-top: 40px solid transparent;
-  border-bottom: 40px solid transparent;
-  border-left: 40px solid #090979;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: #090979;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-left-style: solid;
 }
 .slide-infographics .slide-item .icon {
   position: relative;
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  flex: 0 0 100px;
+  width: 10%;
+  height: 10%;
+  flex: 0 0 10%;
   z-index: 3;
 }
 
@@ -108,9 +111,10 @@
     position: relative;
     width: 100%;
     color: white;
+    height: 100px;
     margin-left: 50px;
     margin-top: -100px;
-    padding: 10px 10px 10px 70px;
+    padding-left: 70px;
     flex:none;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;

@@ -1,14 +1,14 @@
 (function ($) {
   "use strict";
 
-  window.charts_bar = {};
+  window.chartsBar = {};
 
-  charts_bar.animated = {}
+
 
   /**
    * Init
    */
-  charts_bar.init = function () {
+  chartsBar.init = function () {
 
     var $wrappers = $('.bar-chart-wrapper');
 
@@ -18,9 +18,9 @@
 
         var endpoint = $(element).data('endpoint');
         var $canvas = $(element).attr('id', 'bar-chart-wrapper-' + index);
-        charts_bar.animated[$canvas.attr('id')] = true
 
-        charts_bar.createWidget(endpoint, $canvas, index);
+
+        chartsBar.createWidget(endpoint, $canvas, index);
 
       });
     }
@@ -37,7 +37,7 @@
    * vertical chart canvas index
    */
 
-  charts_bar.createWidget = function (url, $canvas, index) {
+  chartsBar.createWidget = function (url, $canvas, index) {
 
     $.get({
       url: url,
@@ -47,20 +47,20 @@
 
         //set custom tooltip with unit
         if (data.data.hasOwnProperty('unit')) {
-          charts_bar.setUnit(data);
+          chartsBar.setUnit(data);
         }
 
-        charts_bar.setCustomLegend(data);
+        chartsBar.setCustomLegend(data);
 
-        var chart = new Chart($canvas, data);
+        var $chart = new Chart($canvas, data);
 
         //set custom legend Wrapper
         $canvas.parent().append('<div class="bar-chart-legend" id="bar-chart-legend-' + index + '"></div>')
 
-        var legend = $('#bar-chart-legend-' + index);
+        var $legend = $('#bar-chart-legend-' + index);
 
         //CHARTJS generate legend Function
-        legend.html(chart.generateLegend());
+        $legend.html($chart.generateLegend());
 
       }
     ).fail(function () {
@@ -73,7 +73,7 @@
    * @param data (JSON)
    * data from endpoint
    */
-  charts_bar.setUnit = function (data) {
+  chartsBar.setUnit = function (data) {
     data.options.tooltips = {
       callbacks: {
         label: function (tooltipItem, data) {
@@ -94,7 +94,7 @@
    * @param data (JSON)
    * data from endpoint
    */
-  charts_bar.setCustomLegend = function (data) {
+  chartsBar.setCustomLegend = function (data) {
     Object.assign(data.options, {
       'legendCallback': function (chart) {
         var text = [];
@@ -122,7 +122,7 @@
    * @returns {boolean}
    * @private
    */
-  charts_bar._isMobile = function () {
+  chartsBar._isMobile = function () {
     return $(window).width() <= 1024
   }
 
@@ -138,7 +138,7 @@
     attach: function (context, settings) {
 
       if (context === window.document) {
-        charts_bar.init();
+        chartsBar.init();
       }
     }
   };

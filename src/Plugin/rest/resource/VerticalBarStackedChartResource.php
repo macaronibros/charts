@@ -17,7 +17,7 @@ use Psr\Log\LoggerInterface;
  *   id = "vertical_bar_stacked_chart_resource",
  *   label = @Translation("Vertical Bar Stacked Chart Resource"),
  *   uri_paths = {
- *     "canonical" = "/macaroni-charts/vertical-bar-stacked-chart/{paragraph_id}"
+ *     "canonical" = "/macaroni-charts/vertical-bar-stacked-chart/{id}"
  *   }
  * )
  */

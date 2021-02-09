@@ -1,13 +1,13 @@
 (function ($) {
   "use strict";
-  window.charts_bubble = {};
+  window.chartsBubble = {};
 
-  charts_bubble.animated = {};
+  chartsBubble.animated = {};
 
   /**
    * Init function
    */
-  charts_bubble.init = function () {
+  chartsBubble.init = function () {
 
     var $wrappers = $('.chart-wrapper-bubble');
 
@@ -17,9 +17,9 @@
 
         var endpoint = $(element).data('endpoint');
         var $canvas = $(element).attr('id', 'chart-wrapper-bubble-' + index);
-        charts_bubble.animated[$canvas.attr('id')] = true;
+        chartsBubble.animated[$canvas.attr('id')] = true;
 
-        charts_bubble.createWidget(endpoint, $canvas);
+        chartsBubble.createWidget(endpoint, $canvas);
 
       });
     }
@@ -32,14 +32,14 @@
    * @param $canvas
    * bubble chart canvas
    */
-  charts_bubble.createWidget = function (url, $canvas) {
+  chartsBubble.createWidget = function (url, $canvas) {
 
     $.get({
       url: url,
       dataType: 'json'
     }).done(
       function (data) {
-        charts_bubble.createbubbleChart($canvas, data);
+        chartsBubble.createBubbleChart($canvas, data);
       }
     ).fail(function () {
       console.log('Fail get data')
@@ -56,23 +56,23 @@
    * data from endpoint
    */
 
-  charts_bubble.createbubbleChart = function ($canvas, data) {
+  chartsBubble.createBubbleChart = function ($canvas, data) {
 
     $canvas.append('<ul class="bubble-infographics"></ul>');
 
     var $ul = $canvas.children('ul');
 
-    var current_data = data.data.datasets[0];
+    var currentData = data.data.datasets[0];
 
 
-    charts_bubble._sortValues(current_data);
+    chartsBubble._sortValues(currentData);
 
-    $.each(current_data.data, function (index) {
+    $.each(currentData.data, function (index) {
       var $li = $('<li class="bubble-item"></li>');
 
-      var element = '<div class="bubble"><div class="bubble-title">' + current_data.labels[index] + '</div>';
+      var element = '<div class="bubble"><div class="bubble-title">' + currentData.labels[index] + '</div>';
 
-      element += '<div class="n-format">' + charts_bubble._nFormatter(current_data.data[index]) + '</div>';
+      element += '<div class="n-format">' + chartsBubble._nFormatter(currentData.data[index]) + '</div>';
 
       element += '</div>';
 
@@ -80,10 +80,10 @@
 
       $li.append(element);
 
-      charts_bubble.setUpBubbleStyle($li, index, current_data);
+      chartsBubble.setUpBubbleStyle($li, index, currentData);
     });
 
-    charts_bubble.setUpBubbleWidth($ul, current_data);
+    chartsBubble.setUpBubbleWidth($ul, currentData);
 
   }
 
@@ -97,8 +97,8 @@
    * @param current_data (JSON)
    * current data from endpoint
    */
-  charts_bubble.setUpBubbleStyle = function ($current, index, current_data) {
-    $current.css('background-color', current_data.backgroundColor[index]);
+  chartsBubble.setUpBubbleStyle = function ($current, index, currentData) {
+    $current.css('background-color', currentData.backgroundColor[index]);
   }
 
 
@@ -110,31 +110,31 @@
    * current data from endpoint
    */
 
-  charts_bubble.setUpBubbleWidth = function ($ul, current_data) {
+  chartsBubble.setUpBubbleWidth = function ($ul, currentData) {
 
-    var canvas_width = $ul.width(),
-      number_elements = current_data.data.length,
+    var canvasWidth = $ul.width(),
+      numberElements = currentData.data.length,
       $items = $ul.children('li'),
-      max_width = canvas_width * 0.3,
-      min_width = canvas_width * 0.17;
+      maxWidth = canvasWidth * 0.3,
+      minWidth = canvasWidth * 0.17;
 
     //set dimension of first and last items
     $items.first().css({
-      width: max_width,
-      height: max_width
+      width: maxWidth,
+      height: maxWidth
     })
     $items.last().css({
-      width: min_width,
-      height: min_width
+      width: minWidth,
+      height: minWidth
     })
 
     $items.each(function (index) {
 
-      if (index !== 0 && index !== number_elements - 1) {
-        var current_value = charts_bubble._normalizeRange(current_data.data[index].data, [current_data.data[number_elements - 1].data, current_data.data[0].data], [min_width, max_width]);
+      if (index !== 0 && index !== numberElements - 1) {
+        var current_value = chartsBubble._normalizeRange(currentData.data[index].data, [currentData.data[numberElements - 1].data, currentData.data[0].data], [minWidth, maxWidth]);
         //check min width
-        if (current_value < min_width) {
-          current_value = min_width;
+        if (current_value < minWidth) {
+          current_value = minWidth;
         }
         //set dimension
         $(this).css({
@@ -145,18 +145,18 @@
     })
 
     //set viewport_width
-    var viewport_width;
-    if (number_elements < 3) {
-      viewport_width = max_width;
+    var viewportWidth;
+    if (numberElements < 3) {
+      viewportWidth = maxWidth;
       $ul.css('background-image', 'none')
     } else {
-      viewport_width = number_elements * canvas_width * 0.12;
+      viewportWidth = numberElements * canvasWidth * 0.12;
     }
 
 
-    $ul.css('height', viewport_width);
-    charts_bubble.randomPosition($ul, $items);
-    charts_bubble.setUpText($items);
+    $ul.css('height', viewportWidth);
+    chartsBubble.randomPosition($ul, $items);
+    chartsBubble.setUpText($items);
   }
 
 
@@ -167,31 +167,32 @@
    * @param $elements
    * all items in list
    */
-  charts_bubble.randomPosition = function ($ul, $elements) {
+  chartsBubble.randomPosition = function ($ul, $elements) {
 
     var filled_areas = [];
 
     $elements.each(function () {
-      var rand_x = 0;
-      var rand_y = 0;
+      var randX = 0;
+      var randY = 0;
       var area;
+      var $this = $(this);
       //regenerate position of element until it don't overlap others
       do {
         //random position x,y of element
-        rand_x = Math.random() * ($ul.width() - $(this).width());
-        rand_y = Math.random() * ($ul.height() - $(this).height());
+        randX = Math.random() * ($ul.width() -$this.width());
+        randY = Math.random() * ($ul.height() - $this.height());
         //set area based on width and height of element
         area = {
-          x: rand_x,
-          y: rand_y,
-          width: $(this).width(),
-          height: $(this).height()
+          x: randX,
+          y: randY,
+          width: $this.width(),
+          height: $this.height()
         };
-      } while (charts_bubble._check_overlap(area, filled_areas, $(this)));
+      } while (chartsBubble._check_overlap(area, filled_areas, $this));
       //if element don't overlap other push it in filled areas
       filled_areas.push(area);
       //if element don't overlap other change position
-      $(this).css({left: rand_x, top: rand_y});
+      $(this).css({left: randX, top: randY});
     });
   }
 
@@ -201,10 +202,11 @@
    * @param $elements
    * elements in wrapper
    */
-  charts_bubble.setUpText = function ($elements) {
+  chartsBubble.setUpText = function ($elements) {
     $elements.each(function () {
-      $(this).children().children('.bubble-title').css('font-size', $(this).width() * 0.1);
-      $(this).children().children('.n-format').css('font-size', $(this).width() * 0.2)
+      var $this = $(this);
+      $this.children().children('.bubble-title').css('font-size', $this.width() * 0.1);
+      $this.children().children('.n-format').css('font-size', $this.width() * 0.2)
     })
   }
 
@@ -212,14 +214,16 @@
   /**
    * Scroll Handler
    */
-  charts_bubble.handleScroll = function () {
+  chartsBubble.handleScroll = function () {
 
     $(window).scroll(function () {
+      var $bubbles = $('.bubble-infographics');
 
-      if ($('.bubble-infographics').length > 0) {
-        $('.bubble-infographics').each(function () {
-          if ($(this).visible()) {
-            charts_bubble.animateNumbers($(this));
+      if ($bubbles.length > 0) {
+        $bubbles.each(function () {
+          var $this = $(this);
+          if ($this.visible()) {
+            chartsBubble.animateNumbers($this);
           }
         })
       }
@@ -231,36 +235,38 @@
    * @param $element
    * current element
    */
-  charts_bubble.animateNumbers = function ($element) {
+  chartsBubble.animateNumbers = function ($element) {
     $element.find('.number').each(function () {
 
-      if (charts_bubble.animated[$element.parent().attr('id')]) {
+      var $this = $(this);
 
-        if ($(this).text().split('.').length > 1) {
-          var digit = charts_bubble._countDecimal($(this).text());
-          $(this).prop('Counter', 0).animate({
-            Counter: $(this).text()
+      if (chartsBubble.animated[$element.parent().attr('id')]) {
+
+        if ($this.text().split('.').length > 1) {
+          var digit = chartsBubble._countDecimal($this.text());
+          $this.prop('Counter', 0).animate({
+            Counter:$this.text()
           }, {
             duration: 4000,
             easing: 'swing',
             step: function (now) {
-              $(this).text(now.toFixed(digit).replace(/(\d)(?=(\d{3})+\.)/g, '$1.'));
+              $this.text(now.toFixed(digit).replace(/(\d)(?=(\d{3})+\.)/g, '$1.'));
             }
           });
         } else {
-          $(this).prop('Counter', 0).animate({
-            Counter: $(this).text()
+          $this.prop('Counter', 0).animate({
+            Counter: $this.text()
           }, {
             duration: 4000,
             easing: 'swing',
             step: function (now) {
-              $(this).text(Math.ceil(now));
+              $this.text(Math.ceil(now));
             }
           });
         }
       }
     });
-    charts_bubble.animated[$element.parent().attr('id')] = false;
+    chartsBubble.animated[$element.parent().attr('id')] = false;
   }
 
 
@@ -274,37 +280,38 @@
    * Check overlap between elements in area and new element
    * @param area
    * area of new element
-   * @param filled_areas
+   * @param filledAreas
    * area of previous elements
    * @param $element
    * new element
    * @returns {boolean}
    * @private
    */
-  charts_bubble._check_overlap = function (area, filled_areas, $element) {
-    for (var i = 0; i < filled_areas.length; i++) {
+  chartsBubble._check_overlap = function (area, filledAreas, $element) {
+    for (var i = 0; i < filledAreas.length; i++) {
 
-      var check_area = filled_areas[i];
+      var checkArea = filledAreas[i];
 
       var bottom1 = area.y + area.height;
-      var bottom2 = check_area.y + check_area.height;
+      var bottom2 = checkArea.y + checkArea.height;
       var top1 = area.y;
-      var top2 = check_area.y;
+      var top2 = checkArea.y;
       var left1 = area.x;
-      var left2 = check_area.x;
+      var left2 = checkArea.x;
       var right1 = area.x + area.width;
-      var right2 = check_area.x + check_area.width;
+      var right2 = checkArea.x + checkArea.width;
       //check if element overlap with filled areas
       if (bottom1 < top2 || top1 > bottom2 || right1 < left2 || left1 > right2) {
         continue;
       }
       //reduce element dimension of 1px to prevent flood
       $element.each(function () {
-        var bubble_h = $(this).height();
-        var bubble_w = $(this).width();
+        var $this= $(this);
+        var bubbleH = $this.height();
+        var bubbleW = $this.width();
         $(this).css({
-          height: (bubble_h - 1),
-          width: (bubble_w - 1),
+          height: (bubbleH - 1),
+          width: (bubbleW - 1),
         })
       })
       return true;
@@ -314,28 +321,28 @@
 
   /**
    * Sort DESC values of data
-   * @param current_data
+   * @param currentData
    * data from endpoint
    */
-  charts_bubble._sortValues = function (current_data) {
-    var values_data = current_data.data;
-    var values_labels = current_data.labels;
+  chartsBubble._sortValues = function (currentData) {
+    var valuesData = currentData.data;
+    var valuesLabels = currentData.labels;
 
     var values = [];
-    for (var j = 0; j < values_data.length; j++)
-      values.push({'data': values_data[j], 'label': values_labels[j]});
+    for (var j = 0; j < valuesData.length; j++)
+      values.push({'data': valuesData[j], 'label': valuesLabels[j]});
 
     values.sort(function (a, b) {
       return b.data - a.data;
     });
 
     for (var k = 0; k < values.length; k++) {
-      values_data[k] = values[k].data;
-      values_labels[k] = values[k].label;
+      valuesData[k] = values[k].data;
+      valuesLabels[k] = values[k].label;
     }
 
-    current_data.data = values_data;
-    current_data.labels = values_labels;
+    currentData.data = valuesData;
+    currentData.labels = valuesLabels;
   }
 
   /**
@@ -350,7 +357,7 @@
    * @returns normalized value (int)
    */
 
-  charts_bubble._normalizeRange = function (value, r1, r2) {
+  chartsBubble._normalizeRange = function (value, r1, r2) {
     return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0];
   }
 
@@ -361,7 +368,7 @@
    * number of decimal position of number
    * @private
    */
-  charts_bubble._countDecimal = function (number) {
+  chartsBubble._countDecimal = function (number) {
     if(Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
   }
@@ -375,7 +382,7 @@
    * Formatted number
    * @private
    */
-  charts_bubble._nFormatter = function (number,digits= 2) {
+  chartsBubble._nFormatter = function (number, digits= 2) {
 
     var value = [
       { value: 1, symbol: "" },
@@ -409,8 +416,8 @@
     attach: function (context, settings) {
 
       if (context === window.document) {
-        charts_bubble.init();
-        charts_bubble.handleScroll();
+        chartsBubble.init();
+        chartsBubble.handleScroll();
       }
 
     }

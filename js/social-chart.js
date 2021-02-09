@@ -1,13 +1,13 @@
 (function ($) {
   "use strict";
-  window.charts_social = {};
+  window.chartsSocial = {};
 
-  charts_social.animated = {};
+  chartsSocial.animated = {};
 
   /**
    * Init
    */
-  charts_social.init = function () {
+  chartsSocial.init = function () {
 
     var $wrappers = $('.chart-wrapper-social');
 
@@ -17,9 +17,9 @@
 
         var endpoint = $(element).data('endpoint');
         var $canvas = $(element).attr('id', 'chart-wrapper-social-' + index);
-        charts_social.animated[$canvas.attr('id')] = true;
+        chartsSocial.animated[$canvas.attr('id')] = true;
 
-        charts_social.createWidget(endpoint, $canvas);
+        chartsSocial.createWidget(endpoint, $canvas);
 
       });
     }
@@ -33,14 +33,14 @@
    * social chart canvas
    */
 
-  charts_social.createWidget = function (url, $canvas) {
+  chartsSocial.createWidget = function (url, $canvas) {
 
     $.get({
       url: url,
       dataType: 'json'
     }).done(
       function (data) {
-        charts_social.createSocialChart($canvas, data);
+        chartsSocial.createSocialChart($canvas, data);
       }
     ).fail(function () {
       console.log('Fail get data')
@@ -55,22 +55,22 @@
    * @param data (JSON)
    * data from endpoint
    */
-  charts_social.createSocialChart = function ($canvas, data) {
+  chartsSocial.createSocialChart = function ($canvas, data) {
 
     $canvas.append('<ul class="social-infographics"></ul>');
 
     var $ul = $canvas.children('ul');
 
-    var current_data = data.data.datasets[0];
+    var currentData = data.data.datasets[0];
 
     //generate social widget structure
-    $.each(current_data.data, function (index) {
-      var $li = $('<li style="color:' + current_data.backgroundColor[0] + '" data-hover="' + current_data.backgroundColor[1] + '" data-color="' + current_data.backgroundColor[0] + '"></li>');
+    $.each(currentData.data, function (index) {
+      var $li = $('<li style="color:' + currentData.backgroundColor[0] + '" data-hover="' + currentData.backgroundColor[1] + '" data-color="' + currentData.backgroundColor[0] + '"></li>');
 
-      var element = '<div class="social" style="border-color:' + current_data.borderColor[0] + '"><div class="icon" style="fill:' + current_data.borderColor[0] + '">' + current_data.icons[index] + '</div>' +
-        '<span class="arrow-down" style="border-top-color:' + current_data.borderColor[0] + '"></span></div>';
+      var element = '<div class="social" style="border-color:' + currentData.borderColor[0] + '"><div class="icon" style="fill:' + currentData.borderColor[0] + '">' + currentData.icons[index] + '</div>' +
+        '<span class="arrow-down" style="border-top-color:' + currentData.borderColor[0] + '"></span></div>';
 
-      element += '<div class="n-format">' + charts_social._nFormatter(current_data.data[index]) + '</div>';
+      element += '<div class="n-format">' + chartsSocial._nFormatter(currentData.data[index]) + '</div>';
 
       element += '<h6>' + data.data.labels[index] + '</h6>';
 
@@ -78,10 +78,10 @@
       $ul.append($li);
       $li.append(element);
 
-      $li.hover(charts_social.onHoverIn, charts_social.onHoverOut);
+      $li.hover(chartsSocial.onHoverIn, chartsSocial.onHoverOut);
 
       //setup style based on data
-      charts_social.setUpSocialStyle($ul, current_data, $li, index);
+      chartsSocial.setUpSocialStyle($ul, currentData, $li, index);
     });
   }
 
@@ -89,25 +89,25 @@
    * Hover in
    * @param event
    */
-  charts_social.onHoverIn = function (event) {
+  chartsSocial.onHoverIn = function (event) {
 
     var $this = $(this);
 
     var color = $this.data('hover');
 
-    var $social_item = $this.children('.social');
-    var $arrow_down = $social_item.children('.arrow-down');
+    var $socialItem = $this.children('.social');
+    var $arrowDown = $socialItem.children('.arrow-down');
 
     $this.css({
       'color': color
     });
 
-    $social_item.css({
+    $socialItem.css({
       'border-color': color,
       'color': color
     });
-    $social_item.children('.icon').children('svg').css('fill', color);
-    $arrow_down.css('border-top-color', color);
+    $socialItem.children('.icon').children('svg').css('fill', color);
+    $arrowDown.css('border-top-color', color);
 
   };
 
@@ -115,26 +115,26 @@
    * Hover out
    * @param event
    */
-  charts_social.onHoverOut = function (event) {
+  chartsSocial.onHoverOut = function (event) {
 
     var $this = $(this);
 
     var color = $this.data('color');
 
-    var $social_item = $this.children('.social');
-    var $arrow_down = $social_item.children('.arrow-down');
+    var $socialItem = $this.children('.social');
+    var $arrowDown = $socialItem.children('.arrow-down');
 
     $this.css({
       'border-color': color,
       'color': color
     });
 
-    $social_item.css({
+    $socialItem.css({
       'border-color': color,
       'color': color
     });
-    $social_item.children('.icon').children('svg').css('fill', color)
-    $arrow_down.css('border-top-color', color)
+    $socialItem.children('.icon').children('svg').css('fill', color)
+    $arrowDown.css('border-top-color', color)
 
   };
 
@@ -144,37 +144,34 @@
    * current element
    * @param index (int)
    * current index of element
-   * @param current_data
+   * @param currentData
    * current data from endpoint
    */
-  charts_social.setUpSocialStyle = function ($ul, current_data, $current, index) {
-    var width, height, font_icon, font_label, border_width;
+  chartsSocial.setUpSocialStyle = function ($ul, currentData, $current) {
+    var width, height, fontIcon, fontLabel, borderWidth;
 
     // Calculate social chart elements value based on number of items
-    if (current_data.data.length > 6 && !charts_social._isMobile()) {
-      width = ($ul.width() / current_data.data.length) - 20;
+    if (currentData.data.length > 6 && !chartsSocial._isMobile()) {
+      width = ($ul.width() / currentData.data.length) - 20;
       height = width;
-      font_icon = (width * 50) / 100;
-      font_label = (width * 16) / 100;
-      border_width = (width * 12) / 100
-    } else if (charts_social._isMobile()) {
+      fontIcon = (width * 50) / 100;
+      fontLabel = (width * 16) / 100;
+    } else if (chartsSocial._isMobile()) {
       width = 60;
       height = 60;
-      font_icon = 30;
-      font_label = 16;
-      border_width = 6;
+      fontIcon = 30;
+      fontLabel = 16;
     } else {
       width = 100;
       height = 100;
-      font_icon = 50;
-      font_label = 16;
-      border_width = 12;
+      fontIcon = 50;
+      fontLabel = 16;
     }
 
     var $social_item = $current.children('.social');
     var $arrow_down = $social_item.children('.arrow-down');
 
-    var borderWidth = current_data.borderWidth;
+    var borderWidth = currentData.borderWidth;
 
 
     //change style of social item
@@ -182,36 +179,38 @@
       'border-width': borderWidth,
       'width': width,
       'height': height,
-      'font-size': font_icon,
+      'font-size': fontIcon,
     });
 
     //change style of icon
     $social_item.children('.icon').children().css({
-      'width': font_icon,
-      'height': font_icon,
+      'width': fontIcon,
+      'height': fontIcon,
     });
 
     //change style of label
-    $current.children('h6').css('font-size', font_label);
+    $current.children('h6').css('font-size', fontLabel);
 
     //change style of triangle; divided in two to allow the calculation of triangle's border width
-    $arrow_down.css('border-width', border_width);
+    $arrow_down.css('border-width', borderWidth*4);
 
     $arrow_down.css({
-      'bottom': -(borderWidth + parseInt($arrow_down.css('border-top').split(' ')[0].replace(/[^0-9.]/g, "")) - 1)
+      'bottom': -(borderWidth*4)
     });
   }
 
   /**
    * Scroll Handler
    */
-  charts_social.handleScroll = function () {
+  chartsSocial.handleScroll = function () {
 
     $(window).scroll(function () {
-      if ($('.social-infographics').length > 0) {
-        $('.social-infographics').each(function () {
-          if ($(this).visible()) {
-            charts_social.animateNumbers($(this));
+      var $infographics = $('.social-infographics');
+      if ($infographics.length > 0) {
+        $infographics.each(function () {
+          var $this= $(this);
+          if ($this.visible()) {
+            chartsSocial.animateNumbers($this);
           }
         })
       }
@@ -223,37 +222,37 @@
    * @param $element
    * current element
    */
-  charts_social.animateNumbers = function ($element) {
+  chartsSocial.animateNumbers = function ($element) {
     $element.find('.number').each(function () {
-
+      var $this= $(this);
       //check if element's animation was already done
-      if (charts_social.animated[$element.parent().attr('id')]) {
-        if ($(this).text().split('.').length > 1) {
-          var digit = charts_social._countDecimal($(this).text());
-          $(this).prop('Counter', 0).animate({
-            Counter: $(this).text()
+      if (chartsSocial.animated[$element.parent().attr('id')]) {
+        if ($this.text().split('.').length > 1) {
+          var digit = chartsSocial._countDecimal($this.text());
+          $this.prop('Counter', 0).animate({
+            Counter: $this.text()
           }, {
             duration: 4000,
             easing: 'swing',
             step: function (now) {
-              $(this).text(now.toFixed(digit).replace(/(\d)(?=(\d{3})+\.)/g, '$1.'));
+              $this.text(now.toFixed(digit).replace(/(\d)(?=(\d{3})+\.)/g, '$1.'));
             }
           });
         } else {
-          $(this).prop('Counter', 0).animate({
-            Counter: $(this).text()
+          $this.prop('Counter', 0).animate({
+            Counter: $this.text()
           }, {
             duration: 4000,
             easing: 'swing',
             step: function (now) {
-              $(this).text(Math.ceil(now));
+              $this.text(Math.ceil(now));
             }
           });
         }
 
       }
     });
-    charts_social.animated[$element.parent().attr('id')] = false;
+    chartsSocial.animated[$element.parent().attr('id')] = false;
   }
 
 
@@ -267,7 +266,7 @@
    * @private
    */
 
-  charts_social._isMobile = function () {
+  chartsSocial._isMobile = function () {
     return $(window).width() <= 1024
   }
 
@@ -280,7 +279,7 @@
    * Formatted number
    * @private
    */
-  charts_social._nFormatter = function (number, digits = 2) {
+  chartsSocial._nFormatter = function (number, digits = 2) {
     var value = [
       {value: 1, symbol: ""},
       {value: 1E3, symbol: "K"},
@@ -308,7 +307,7 @@
    * number of decimal position of number
    * @private
    */
-  charts_social._countDecimal = function (number) {
+  chartsSocial._countDecimal = function (number) {
     if (Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
   }
@@ -326,8 +325,8 @@
     attach: function (context, settings) {
 
       if (context === window.document) {
-        charts_social.init();
-        charts_social.handleScroll();
+        chartsSocial.init();
+        chartsSocial.handleScroll();
       }
 
     }

@@ -1,13 +1,13 @@
 (function ($) {
   "use strict";
-  window.charts_slide = {};
+  window.chartsSlide = {};
 
-  charts_slide.animated = {};
+  chartsSlide.animated = {};
 
   /**
    * Init
    */
-  charts_slide.init = function () {
+  chartsSlide.init = function () {
 
     var $wrappers = $('.chart-wrapper-slide');
 
@@ -17,9 +17,9 @@
 
         var endpoint = $(element).data('endpoint');
         var $canvas = $(element).attr('id', 'chart-wrapper-slide-' + index);
-        charts_slide.animated[$canvas.attr('id')] = true;
+        chartsSlide.animated[$canvas.attr('id')] = true;
 
-        charts_slide.createWidget(endpoint, $canvas);
+        chartsSlide.createWidget(endpoint, $canvas);
 
       });
     }
@@ -33,14 +33,14 @@
    * slide chart canvas
    */
 
-  charts_slide.createWidget = function (url, $canvas) {
+  chartsSlide.createWidget = function (url, $canvas) {
 
     $.get({
       url: url,
       dataType: 'json'
     }).done(
       function (data) {
-        charts_slide.createSlideChart($canvas, data);
+        chartsSlide.createSlideChart($canvas, data);
       }
     ).fail(function () {
       console.log('Fail get data')
@@ -57,7 +57,7 @@
    * @param data (JSON)
    * data from endpoint
    */
-  charts_slide.createSlideChart = function ($canvas, data) {
+  chartsSlide.createSlideChart = function ($canvas, data) {
 
 
     $canvas.append('<ul class="slide-infographics"></ul>');
@@ -65,27 +65,28 @@
     var $ul = $canvas.children('ul');
 
 
-    var current_data = data.data.datasets[0];
+    var currentData = data.data.datasets[0];
 
 
-    var max = Math.max.apply(Math, current_data.data);
-    var min = Math.min.apply(Math, current_data.data);
+    var max = Math.max.apply(Math, currentData.data);
+    var min = Math.min.apply(Math, currentData.data);
 
-    $.each(current_data.data, function (index) {
+    $.each(currentData.data, function (index) {
 
       var $li = $('<li class="slide-item"></li>');
 
-      var element = '<div class="icon">' + current_data.icons[index] + '</div>';
-      element += '<div class="slide-info">' + current_data.info[index] + '<div class="triangle-right"></div></div>'
-      element += '<div class="number"><div class="number-item">' + charts_slide._formatNumber(current_data.data[index], index, current_data) + '</div><div class="triangle-right"></div>';
+      var element = '<div class="icon">' + currentData.icons[index] + '</div>';
+      element += '<div class="slide-info">' + currentData.info[index] + '</div>';
+      element += '<div class="triangle"></div>';
+      element += '<div class="number"><div class="number-item">' + chartsSlide._formatNumber(currentData.data[index], index, currentData) + '</div><div class="triangle"></div>';
 
       $ul.append($li);
       $li.append(element);
 
-      charts_slide.setUpSlideStyle($li, index, current_data);
+      chartsSlide.setUpSlideStyle($li, index, currentData);
     });
 
-    charts_slide.setUpSlideWidth($ul, current_data, min, max);
+    chartsSlide.setUpSlideWidth($ul, currentData, min, max);
   }
 
   /**
@@ -98,7 +99,7 @@
    * current data from endpoint
    */
 
-  charts_slide.setUpSlideStyle = function ($current, index, current_data) {
+  chartsSlide.setUpSlideStyle = function ($current, index, current_data) {
 
     var backgroundColor = current_data.backgroundColor[index];
 
@@ -106,11 +107,11 @@
 
     $current.children('.number').css('background-color', backgroundColor);
 
-    $current.children('.slide-info').css('background-color', charts_slide._LightenDarkenColor(backgroundColor, 20));
+    $current.children('.slide-info').css('background-color', chartsSlide._LightenDarkenColor(backgroundColor, 20));
 
-    $current.children('.slide-info ').children('.triangle-right').css('border-left-color', charts_slide._LightenDarkenColor(backgroundColor, 20));
+    $current.children('.triangle').css('border-left-color', chartsSlide._LightenDarkenColor(backgroundColor, 20));
 
-    $current.children('.number ').children('.triangle-right').css('border-left-color', backgroundColor);
+    $current.children('.number ').children('.triangle').css('border-left-color', backgroundColor);
   }
 
 
@@ -126,30 +127,58 @@
    * max value from data
    */
 
-  charts_slide.setUpSlideWidth = function ($ul, current_data, min, max) {
+  chartsSlide.setUpSlideWidth = function ($ul, current_data, min, max) {
 
     $ul.children('.slide-item').each(function (index) {
 
-      $(this).children('.slide-info').css('width', $ul.width() * 0.5);
+      var $this = $(this);
 
-      var triangle_width = $(this).children('.number').innerHeight() / 2;
-      console.log($(this).children('.icon').width()/2)
+      var $icon = $this.children('.icon');
+      var $info = $this.children('.slide-info');
+      var $triangle = $this.children('.triangle');
+      var $number = $this.children('.number');
+      var $numberTriangle = $number.children('.triangle');
+
+      var height = $icon.width();
+      var padding = 10;
+
+      $icon.css('height', height);
+      $triangle.css({
+        'border-top-width': height / 2,
+        'border-bottom-width': height / 2,
+        'border-left-width': height / 2
+      });
+
+      $number.css({
+        'height': height - padding,
+        'padding-left': (height / 2) + padding,
+      });
+
+      $numberTriangle.css({
+        'border-top-width': (height - padding) / 2,
+        'border-bottom-width': (height - padding) / 2,
+        'border-left-width': (height - padding) / 2,
+        'right': -(height - padding) / 2
+      });
+
       // ul width - (slide info width - slide info's triangle width) + number's triangle width
-      var max_width = ($ul.width() -( $(this).children('.icon').width()/2) - $(this).children('.slide-info').outerWidth()) - triangle_width;
+      console.log(($numberTriangle.width() / 2));
+      var max_width = ($this.width() * 0.45) - ((height - padding) / 2);
       //number min width +  number's triangle width
-      var min_width = parseInt($(this).children('.number').children().css('width'), 10) + $(this).children('.slide-info').innerHeight() / 2 + triangle_width;
+      var min_width = $this.width() * 0.2;
 
-      if (!charts_slide._isMobile()) {
+      if (!chartsSlide._isMobile()) {
+        var current_value = '';
         if (current_data.data.length > 1) {
-          var current_value = charts_slide._normalizeRange(current_data['data'][index], [max, min], [max_width, min_width]);
+          current_value = chartsSlide._normalizeRange(current_data['data'][index], [max, min], [max_width, min_width]);
         } else {
           current_value = max_width;
         }
-        $(this).children('.number').css('width', current_value);
+        $number.css('width', current_value);
 
       } else {
-        current_value = $ul.width() - ($(this).children('.icon').width()/2);
-        $(this).children('.slide-info').css('width', current_value);
+        current_value = $ul.width() - (height / 2);
+        $info.css('width', current_value);
       }
     })
   }
@@ -158,12 +187,14 @@
    * Scroll Handler
    */
 
-  charts_slide.handleScroll = function () {
+  chartsSlide.handleScroll = function () {
     $(window).scroll(function () {
-      if ($('.slide-infographics').length > 0) {
-        $('.slide-infographics').each(function () {
-          if ($(this).visible()) {
-            charts_slide.animateSlide($(this));
+      var $slide = $('.slide-infographics');
+      if ($slide.length > 0) {
+        $slide.each(function () {
+          var $this = $(this);
+          if ($this.visible()) {
+            chartsSlide.animateSlide($this);
           }
         })
       }
@@ -175,15 +206,16 @@
    * @param $element
    * current element
    */
-  charts_slide.animateSlide = function ($element) {
+  chartsSlide.animateSlide = function ($element) {
     $element.find('.number').each(function () {
-      if (charts_slide.animated[$element.parent().attr('id')] && !charts_slide._isMobile()) {
-        $(this).animate({
-          left: $(this).siblings('.slide-info').outerWidth() + parseInt($(this).css('left'), 10)
+      var $this = $(this);
+      if (chartsSlide.animated[$element.parent().attr('id')] && !chartsSlide._isMobile()) {
+        $this.animate({
+          left: $this.parent().width() * 0.55
         }, 1000, 'linear');
       }
     });
-    charts_slide.animated[$element.parent().attr('id')] = false;
+    chartsSlide.animated[$element.parent().attr('id')] = false;
   }
 
 
@@ -201,7 +233,7 @@
    * modified color
    * @constructor
    */
-  charts_slide._LightenDarkenColor = function (color, percentage) {
+  chartsSlide._LightenDarkenColor = function (color, percentage) {
 
     var usePound = false;
 
@@ -242,7 +274,7 @@
    * @returns normalized value (int)
    */
 
-  charts_slide._normalizeRange = function (value, r1, r2) {
+  chartsSlide._normalizeRange = function (value, r1, r2) {
     return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0];
   }
 
@@ -251,7 +283,7 @@
    * @returns {boolean}
    * @private
    */
-  charts_slide._isMobile = function () {
+  chartsSlide._isMobile = function () {
     return $(window).width() <= 1024
   }
 
@@ -267,15 +299,15 @@
    * @returns {string}
    * @private
    */
-  charts_slide._formatNumber = function (string, index, data) {
-    if (charts_slide._countDecimal(parseFloat(string)) === 0) {
+  chartsSlide._formatNumber = function (string, index, data) {
+    if (chartsSlide._countDecimal(parseFloat(string)) === 0) {
       string = parseFloat(string).toFixed(0)
     }
-    var formatted_number = string.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    var formattedNumber = string.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
     if (data.unit_position[index].length > 0 && data.unit_position[index] === "before") {
-      return data.unit[index] + ' ' + formatted_number;
+      return data.unit[index] + ' ' + formattedNumber;
     } else {
-      return formatted_number + ' ' + data.unit[index];
+      return formattedNumber + ' ' + data.unit[index];
     }
   }
 
@@ -286,7 +318,7 @@
    * number of decimal position of number
    * @private
    */
-  charts_slide._countDecimal = function (number) {
+  chartsSlide._countDecimal = function (number) {
     if (Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
   }
@@ -303,8 +335,8 @@
   Drupal.behaviors.slide_chart = {
     attach: function (context, settings) {
       if (context === window.document) {
-        charts_slide.init();
-        charts_slide.handleScroll();
+        chartsSlide.init();
+        chartsSlide.handleScroll();
       }
     }
   };

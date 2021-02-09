@@ -25,7 +25,7 @@
     CHARTJS.s.$categories.bind('change', CHARTJS.categoryDataHandler);
 
     //hide aggregated data field
-    //CHARTJS.s.$data.parents('.field--name-field-charts-aggregated-data').hide();
+    CHARTJS.s.$data.parents('.field--name-field-charts-aggregated-data').hide();
 
     CHARTJS.buildForms();
   }

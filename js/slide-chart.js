@@ -77,7 +77,7 @@
 
       var element = '<div class="icon">' + current_data.icons[index] + '</div>';
       element += '<div class="slide-info">' + current_data.info[index] + '<div class="triangle-right"></div></div>'
-      element += '<div class="number"><div class="number-item">' +  charts_slide._formatNumber(current_data.data[index],index,current_data) + '</div><div class="triangle-right"></div>';
+      element += '<div class="number"><div class="number-item">' + charts_slide._formatNumber(current_data.data[index], index, current_data) + '</div><div class="triangle-right"></div>';
 
       $ul.append($li);
       $li.append(element);
@@ -130,7 +130,9 @@
 
     $ul.children('.slide-item').each(function (index) {
 
-      var triangle_width = $(this).children('.number').innerHeight() / 2
+      $(this).children('.slide-info').css('width', $ul.width() * 0.5);
+
+      var triangle_width = $(this).children('.number').innerHeight() / 2;
       // ul width - (slide info width - slide info's triangle width) + number's triangle width
       var max_width = ($ul.width() - $(this).children('.icon').width() - $(this).children('.slide-info').outerWidth() - triangle_width) + $(this).children('.slide-info').innerHeight() / 2;
       //number min width +  number's triangle width
@@ -265,14 +267,14 @@
    * @private
    */
   charts_slide._formatNumber = function (string, index, data) {
-    if(charts_slide._countDecimal(parseFloat(string)) === 0) {
+    if (charts_slide._countDecimal(parseFloat(string)) === 0) {
       string = parseFloat(string).toFixed(0)
     }
-     var formatted_number = string.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-    if(data.unit_position[index].length > 0 && data.unit_position[index] === "before") {
-      return data.unit[index]+' '+ formatted_number;
-    }else {
-      return formatted_number+' '+data.unit[index];
+    var formatted_number = string.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    if (data.unit_position[index].length > 0 && data.unit_position[index] === "before") {
+      return data.unit[index] + ' ' + formatted_number;
+    } else {
+      return formatted_number + ' ' + data.unit[index];
     }
   }
 
@@ -284,7 +286,7 @@
    * @private
    */
   charts_slide._countDecimal = function (number) {
-    if(Math.floor(number) === number) return 0;
+    if (Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
   }
 

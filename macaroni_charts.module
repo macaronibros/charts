@@ -128,6 +128,16 @@ function macaroni_charts_library_info_build() {
   return $libraries;
 }
 
+/**
+ * Prevents validation of decimal numbers
+ * @see https://www.drupal.org/node/2230909
+ */
+function macaroni_charts_field_widget_form_alter(&$element, \Drupal\Core\Form\FormStateInterface $form_state, $context) {
+  $field_definition = $context['items']->getFieldDefinition();
+  if ($field_definition->getType() == 'decimal') {
+    $element['value']['#step'] = 'any';
+  }
+}
 
 /**
  * Implements hook_page_attachments

@@ -133,8 +133,9 @@
       $(this).children('.slide-info').css('width', $ul.width() * 0.5);
 
       var triangle_width = $(this).children('.number').innerHeight() / 2;
+      console.log($(this).children('.icon').width()/2)
       // ul width - (slide info width - slide info's triangle width) + number's triangle width
-      var max_width = ($ul.width() - $(this).children('.icon').width() - $(this).children('.slide-info').outerWidth() - triangle_width) + $(this).children('.slide-info').innerHeight() / 2;
+      var max_width = ($ul.width() -( $(this).children('.icon').width()/2) - $(this).children('.slide-info').outerWidth()) - triangle_width;
       //number min width +  number's triangle width
       var min_width = parseInt($(this).children('.number').children().css('width'), 10) + $(this).children('.slide-info').innerHeight() / 2 + triangle_width;
 
@@ -147,7 +148,7 @@
         $(this).children('.number').css('width', current_value);
 
       } else {
-        current_value = $ul.width() - $(this).children('.icon').width() + triangle_width;
+        current_value = $ul.width() - ($(this).children('.icon').width()/2);
         $(this).children('.slide-info').css('width', current_value);
       }
     })

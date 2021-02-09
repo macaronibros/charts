@@ -143,6 +143,11 @@
       var padding = 10;
 
       $icon.css('height', height);
+      $icon.children('svg').css({
+        'width': height / 2,
+        'height': height / 2
+      })
+
       $triangle.css({
         'border-top-width': height / 2,
         'border-bottom-width': height / 2,
@@ -162,23 +167,20 @@
       });
 
       // ul width - (slide info width - slide info's triangle width) + number's triangle width
-      console.log(($numberTriangle.width() / 2));
-      var max_width = ($this.width() * 0.45) - ((height - padding) / 2);
+      //console.log(($numberTriangle.width() / 2));
+      var maxWidth = ($this.width() * 0.45) - ((height - padding) / 2);
       //number min width +  number's triangle width
-      var min_width = $this.width() * 0.2;
+      var minWidth = $this.width() * 0.2;
 
       if (!chartsSlide._isMobile()) {
-        var current_value = '';
+        var currentValue = '';
         if (current_data.data.length > 1) {
-          current_value = chartsSlide._normalizeRange(current_data['data'][index], [max, min], [max_width, min_width]);
+          currentValue = chartsSlide._normalizeRange(current_data['data'][index], [max, min], [maxWidth, minWidth]);
         } else {
-          current_value = max_width;
+          currentValue = maxWidth;
         }
-        $number.css('width', current_value);
+        $number.css('width', currentValue);
 
-      } else {
-        current_value = $ul.width() - (height / 2);
-        $info.css('width', current_value);
       }
     })
   }

@@ -105,40 +105,53 @@
 
 @media only screen and (max-width: 1024px) {
   .slide-infographics .slide-item {
-    flex-direction: column;
+    display: block;
+    margin-bottom: 20px;
   }
-  .slide-infographics .slide-item .slide-info {
-    position: relative;
-    width: 100%;
-    color: white;
-    height: 100px;
-    margin-left: 50px;
-    margin-top: -100px;
-    padding-left: 70px;
-    flex:none;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+  .slide-infographics .slide-item:last-child {
+    margin-bottom: 0;
+  }
 
+  .slide-infographics .slide-item .slide-info{
+    margin: 0 auto;
+    border-radius: 20px;
+    padding:20px;
+    width: 80% !important;
   }
-  .slide-infographics .slide-item .slide-info .triangle-right {
+  .slide-infographics .slide-item .triangle {
     display: none;
   }
   .slide-infographics .slide-item .number {
     position: relative;
-    width: 200px;
+    width: 50%;
     color: white;
-    padding: 20px;
     flex:none;
     left: 50%;
     transform: translateX(-50%);
-    height: auto;
+    display: block;
     margin-top: 0;
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    padding: 0 !important;
+    height: 100% !important;
   }
   .slide-infographics .slide-item .number .number-item {
-    text-align: center;
+    display: block;
+    padding: 20px 10px;
   }
-  .slide-infographics .slide-item .number .triangle-right {
+  .slide-infographics .slide-item .number .triangle {
     display: none;
+  }
+
+  .slide-infographics .slide-item .icon {
+    top: 10px;
+    margin: 0 auto;
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .slide-infographics .slide-item .icon svg {
+    width: 40px !important;
+    height: 40px !important;
   }
 }
 

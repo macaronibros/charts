@@ -131,15 +131,15 @@
     $items.each(function (index) {
 
       if (index !== 0 && index !== numberElements - 1) {
-        var current_value = chartsBubble._normalizeRange(currentData.data[index].data, [currentData.data[numberElements - 1].data, currentData.data[0].data], [minWidth, maxWidth]);
+        var currentValue = chartsBubble._normalizeRange(currentData.data[index].data, [currentData.data[numberElements - 1].data, currentData.data[0].data], [minWidth, maxWidth]);
         //check min width
-        if (current_value < minWidth) {
-          current_value = minWidth;
+        if (currentValue < minWidth) {
+          currentValue = minWidth;
         }
         //set dimension
         $(this).css({
-          width: current_value,
-          height: current_value
+          width: currentValue,
+          height: currentValue
         })
       }
     })
@@ -169,7 +169,7 @@
    */
   chartsBubble.randomPosition = function ($ul, $elements) {
 
-    var filled_areas = [];
+    var filledAreas = [];
 
     $elements.each(function () {
       var randX = 0;
@@ -188,9 +188,9 @@
           width: $this.width(),
           height: $this.height()
         };
-      } while (chartsBubble._check_overlap(area, filled_areas, $this));
+      } while (chartsBubble._checkOverlap(area, filledAreas, $this));
       //if element don't overlap other push it in filled areas
-      filled_areas.push(area);
+      filledAreas.push(area);
       //if element don't overlap other change position
       $(this).css({left: randX, top: randY});
     });
@@ -287,7 +287,7 @@
    * @returns {boolean}
    * @private
    */
-  chartsBubble._check_overlap = function (area, filledAreas, $element) {
+  chartsBubble._checkOverlap = function (area, filledAreas, $element) {
     for (var i = 0; i < filledAreas.length; i++) {
 
       var checkArea = filledAreas[i];

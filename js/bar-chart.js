@@ -51,6 +51,8 @@
         }
 
         chartsBar.setCustomLegend(data);
+        chartsBar.truncateLabels(data);
+        chartsBar.formatLabels(data);
 
         var $chart = new Chart($canvas, data);
 
@@ -76,6 +78,9 @@
   chartsBar.setUnit = function (data) {
     data.options.tooltips = {
       callbacks: {
+        title: function(tooltipItem, data) {
+          return data['labels_original'][tooltipItem[0].index];
+        },
         label: function (tooltipItem, data) {
           if (data.hasOwnProperty('unit_position')) {
             if (data['unit_position'] === 'before') {
@@ -112,6 +117,41 @@
     });
   }
 
+  /**
+   * Truncate labels if it length is more than 20 in array of three words
+   * @param data
+   * data from endpoint
+   */
+  chartsBar.truncateLabels = function (data) {
+    Object.assign(data.data , {
+      'labels_original' : []
+    })
+    for(var i = 0; i<data.data.labels.length; i++) {
+      data.data.labels_original.push(data.data.labels[i]);
+      if(data.data.labels[i].length > 20) {
+        data.data.labels[i]= chartsBar._splitByWordCount( data.data.labels[i] , 3).join('\r\n');
+      }
+    }
+  }
+
+  /**
+   * Format label if it contain
+   * @param data
+   */
+  chartsBar.formatLabels = function (data) {
+    Object.assign(data, {
+      plugins: [{
+        beforeInit: function(chart) {
+          chart.data.labels.forEach(function(e, i, a) {
+            if (/\n/.test(e)) {
+              a[i] = e.split(/\n/);
+            }
+          });
+        }
+      }]
+    });
+  }
+
 
   /**
    * Helper functions
@@ -124,6 +164,15 @@
    */
   chartsBar._isMobile = function () {
     return $(window).width() <= 1024
+  }
+
+  chartsBar._splitByWordCount= function (str, count) {
+    var arr = str.split(' ')
+    var r = [];
+    while (arr.length) {
+      r.push(arr.splice(0, count).join(' '))
+    }
+    return r;
   }
 
 })(jQuery);

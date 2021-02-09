@@ -168,14 +168,14 @@
       fontLabel = 16;
     }
 
-    var $social_item = $current.children('.social');
-    var $arrow_down = $social_item.children('.arrow-down');
+    var $socialItem = $current.children('.social');
+    var $arrowDown = $socialItem.children('.arrow-down');
 
     var borderWidth = currentData.borderWidth;
 
 
     //change style of social item
-    $social_item.css({
+    $socialItem.css({
       'border-width': borderWidth,
       'width': width,
       'height': height,
@@ -183,7 +183,7 @@
     });
 
     //change style of icon
-    $social_item.children('.icon').children().css({
+    $socialItem.children('.icon').children().css({
       'width': fontIcon,
       'height': fontIcon,
     });
@@ -192,10 +192,10 @@
     $current.children('h6').css('font-size', fontLabel);
 
     //change style of triangle; divided in two to allow the calculation of triangle's border width
-    $arrow_down.css('border-width', borderWidth*4);
+    $arrowDown.css('border-width', borderWidth * 4);
 
-    $arrow_down.css({
-      'bottom': -(borderWidth*4)
+    $arrowDown.css({
+      'bottom': -(borderWidth * 4)
     });
   }
 
@@ -208,7 +208,7 @@
       var $infographics = $('.social-infographics');
       if ($infographics.length > 0) {
         $infographics.each(function () {
-          var $this= $(this);
+          var $this = $(this);
           if ($this.visible()) {
             chartsSocial.animateNumbers($this);
           }
@@ -224,7 +224,7 @@
    */
   chartsSocial.animateNumbers = function ($element) {
     $element.find('.number').each(function () {
-      var $this= $(this);
+      var $this = $(this);
       //check if element's animation was already done
       if (chartsSocial.animated[$element.parent().attr('id')]) {
         if ($this.text().split('.').length > 1) {

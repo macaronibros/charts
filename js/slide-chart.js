@@ -1,5 +1,6 @@
 (function ($) {
   "use strict";
+
   window.chartsSlide = {};
 
   chartsSlide.animated = {};
@@ -48,7 +49,6 @@
 
   }
 
-
   /**
    * Generate DOM structure of chart and change style of elements based on Data sorted by value;
    * After change width of items
@@ -59,14 +59,11 @@
    */
   chartsSlide.createSlideChart = function ($canvas, data) {
 
-
     $canvas.append('<ul class="slide-infographics"></ul>');
 
     var $ul = $canvas.children('ul');
 
-
     var currentData = data.data.datasets[0];
-
 
     var max = Math.max.apply(Math, currentData.data);
     var min = Math.min.apply(Math, currentData.data);
@@ -134,7 +131,6 @@
       var $this = $(this);
 
       var $icon = $this.children('.icon');
-      var $info = $this.children('.slide-info');
       var $triangle = $this.children('.triangle');
       var $number = $this.children('.number');
       var $numberTriangle = $number.children('.triangle');
@@ -166,21 +162,22 @@
         'right': -(height - padding) / 2
       });
 
+
       // ul width - (slide info width - slide info's triangle width) + number's triangle width
-      //console.log(($numberTriangle.width() / 2));
       var maxWidth = ($this.width() * 0.45) - ((height - padding) / 2);
+
       //number min width +  number's triangle width
       var minWidth = $this.width() * 0.2;
 
+
       if (!chartsSlide._isMobile()) {
-        var currentValue = '';
+        var currentValue = 0;
         if (current_data.data.length > 1) {
           currentValue = chartsSlide._normalizeRange(current_data['data'][index], [max, min], [maxWidth, minWidth]);
         } else {
           currentValue = maxWidth;
         }
         $number.css('width', currentValue);
-
       }
     })
   }
@@ -289,7 +286,6 @@
     return $(window).width() <= 1024
   }
 
-
   /**
    * Form number En notation
    * @param string
@@ -303,13 +299,18 @@
    */
   chartsSlide._formatNumber = function (string, index, data) {
     if (chartsSlide._countDecimal(parseFloat(string)) === 0) {
-      string = parseFloat(string).toFixed(0)
+      string = parseFloat(string).toFixed(0);
     }
     var formattedNumber = string.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-    if (data.unit_position[index].length > 0 && data.unit_position[index] === "before") {
-      return data.unit[index] + ' ' + formattedNumber;
-    } else {
-      return formattedNumber + ' ' + data.unit[index];
+
+    if( data.hasOwnProperty('unit') && typeof data.unit[index] !== 'undefined') {
+      if (data.unit_position[index].length > 0 && data.unit_position[index] === "before") {
+        return data.unit[index] + ' ' + formattedNumber;
+      } else {
+        return formattedNumber + ' ' + data.unit[index];
+      }
+    }else {
+      return formattedNumber;
     }
   }
 
@@ -324,7 +325,6 @@
     if (Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
   }
-
 
 })(jQuery);
 

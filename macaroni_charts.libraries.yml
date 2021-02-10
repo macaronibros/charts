@@ -21,6 +21,9 @@ charts_social:
       css/social-chart.css: {}
   js:
     js/social-chart.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
 
 charts_bubble:
   css:
@@ -28,6 +31,9 @@ charts_bubble:
       css/bubble-chart.css: {}
   js:
     js/bubble-chart.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
 
 charts_slide:
   css:
@@ -35,6 +41,9 @@ charts_slide:
       css/slide-chart.css: {}
   js:
     js/slide-chart.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
 
 charts_bar:
   css:
@@ -42,6 +51,9 @@ charts_bar:
       css/bar-chart.css: { }
   js:
     js/bar-chart.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
 
 charts_circle:
   css:
@@ -49,3 +61,6 @@ charts_circle:
       css/circle-chart.css: { }
   js:
     js/circle-chart.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery

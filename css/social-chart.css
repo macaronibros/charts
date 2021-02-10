@@ -9,6 +9,7 @@
   justify-content: space-between;
   list-style: none;
   margin-left: 0;
+  padding: 0;
 }
 .chart-wrapper-social .social-infographics li {
   flex: 1 1 0;
@@ -70,10 +71,8 @@
   .chart-wrapper-social .social-infographics {
     flex-wrap: wrap;
   }
-}
-
-@media only screen and (max-width: 640px) {
-  .paragraph--type-social-chart h2 {
-    font-size: 34px;
+  .chart-wrapper-social .social-infographics li{
+    flex-basis: 20%;
+    margin-bottom: 10px;
   }
 }

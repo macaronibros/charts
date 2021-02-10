@@ -1,5 +1,6 @@
 (function ($) {
   "use strict";
+
   window.chartsBubble = {};
 
   chartsBubble.animated = {};
@@ -70,9 +71,9 @@
     $.each(currentData.data, function (index) {
       var $li = $('<li class="bubble-item"></li>');
 
-      var element = '<div class="bubble"><div class="bubble-title">' + currentData.labels[index] + '</div>';
+      var element = '<div class="bubble"><div class="bubble-text"><div class="bubble-title">' + currentData.labels[index] + '</div>';
 
-      element += '<div class="n-format">' + chartsBubble._nFormatter(currentData.data[index]) + '</div>';
+      element += '<div class="n-format">' + chartsBubble._nFormatter(currentData.data[index],2) + '</div></div>';
 
       element += '</div>';
 
@@ -115,47 +116,71 @@
     var canvasWidth = $ul.width(),
       numberElements = currentData.data.length,
       $items = $ul.children('li'),
-      maxWidth = canvasWidth * 0.3,
+      maxWidth, minWidth;
+
+    if(!chartsBubble._isMobile()) {
+      maxWidth = canvasWidth * 0.3;
       minWidth = canvasWidth * 0.17;
+    } else {
+      maxWidth = canvasWidth * 0.40;
+      minWidth = canvasWidth * 0.28;
+    }
 
     //set dimension of first and last items
     $items.first().css({
       width: maxWidth,
       height: maxWidth
     })
+    $items.first().children().css({
+      width: maxWidth - 30,
+      height: maxWidth - 20
+    })
+
     $items.last().css({
       width: minWidth,
       height: minWidth
     })
+    $items.last().children().css({
+      width: minWidth - 40,
+      height: minWidth - 20
+    })
 
     $items.each(function (index) {
+      var $this= $(this);
 
       if (index !== 0 && index !== numberElements - 1) {
-        var currentValue = chartsBubble._normalizeRange(currentData.data[index].data, [currentData.data[numberElements - 1].data, currentData.data[0].data], [minWidth, maxWidth]);
+
+        var currentValue = chartsBubble._normalizeRange(currentData.data[index], [currentData.data[numberElements - 1], currentData.data[0]], [minWidth, maxWidth]);
         //check min width
         if (currentValue < minWidth) {
           currentValue = minWidth;
         }
         //set dimension
-        $(this).css({
+        $this.css({
           width: currentValue,
           height: currentValue
+        })
+        $this.children().css({
+          width: currentValue - 30,
+          height: currentValue - 20
         })
       }
     })
 
-    //set viewport_width
-    var viewportWidth;
+    //set viewport Height
+    var viewportHeight;
     if (numberElements < 3) {
-      viewportWidth = maxWidth;
+      viewportHeight = maxWidth;
       $ul.css('background-image', 'none')
     } else {
-      viewportWidth = numberElements * canvasWidth * 0.12;
+      viewportHeight = numberElements * canvasWidth * 0.12;
     }
 
 
-    $ul.css('height', viewportWidth);
-    chartsBubble.randomPosition($ul, $items);
+    $ul.css('height', viewportHeight);
+    if(!chartsBubble._isMobile()) {
+      chartsBubble.randomPosition($ul, $items);
+    }
     chartsBubble.setUpText($items);
   }
 
@@ -205,8 +230,8 @@
   chartsBubble.setUpText = function ($elements) {
     $elements.each(function () {
       var $this = $(this);
-      $this.children().children('.bubble-title').css('font-size', $this.width() * 0.1);
-      $this.children().children('.n-format').css('font-size', $this.width() * 0.2)
+      $this.children().children().children('.bubble-title').css('font-size', $this.width() * 0.1);
+      $this.children().children().children('.n-format').css('font-size', $this.width() * 0.2);
     })
   }
 
@@ -382,7 +407,7 @@
    * Formatted number
    * @private
    */
-  chartsBubble._nFormatter = function (number, digits= 2) {
+  chartsBubble._nFormatter = function (number, digits) {
 
     var value = [
       { value: 1, symbol: "" },
@@ -402,6 +427,16 @@
     }
     return '<div class="number">'+(number / value[i].value).toFixed(digits).replace(regExp, "$1")+ '</div>' + value[i].symbol;
   }
+
+  /**
+   * Check if window width is small than 1024
+   * @returns {boolean}
+   * @private
+   */
+  chartsBubble._isMobile = function () {
+    return $(window).width() <= 1024
+  }
+
 
 
 })(jQuery);

@@ -3,6 +3,7 @@
 }
 .chart-wrapper-bubble .bubble-infographics{
   margin-left: 0;
+  padding: 0;
 }
 .chart-wrapper-bubble .bubble-infographics .bubble-item {
   display: block;
@@ -19,7 +20,9 @@
 .paragraph--type-bubble-chart .bubble-item:before {
   display: none
 }
-.chart-wrapper-bubble .bubble-item:hover, .chart-wrapper-bubble .bubble-item:focus, .bubble-item:active {
+.chart-wrapper-bubble .bubble-item:hover,
+.chart-wrapper-bubble .bubble-item:focus,
+.bubble-item:active {
   -webkit-animation-name: hvr-bob-float, hvr-bob;
   animation-name: hvr-bob-float, hvr-bob;
   -webkit-animation-duration: .3s, 1.5s;
@@ -41,6 +44,12 @@
   left: 50%;
   transform: translate(-50%,-50%);
   text-align: center;
+  overflow: hidden;
+  display: table;
+}
+.chart-wrapper-bubble .bubble .bubble-text{
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .chart-wrapper-bubble .bubble-infographics {
@@ -103,5 +112,23 @@
   100% {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .chart-wrapper-bubble .bubble-infographics {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100% !important;
+  }
+  .chart-wrapper-bubble .bubble-infographics .bubble-item {
+    margin:15px;
+    position: relative;
+  }
+  .chart-wrapper-bubble .bubble-infographics .bubble-item:nth-child(even) {
+    top: -10px;
+  }
+  .chart-wrapper-bubble .bubble-infographics .bubble-item:nth-child(odd) {
+    bottom: -10px;
   }
 }

@@ -3,8 +3,6 @@
 
   window.chartsBar = {};
 
-
-
   /**
    * Init
    */
@@ -18,7 +16,6 @@
 
         var endpoint = $(element).data('endpoint');
         var $canvas = $(element).attr('id', 'bar-chart-wrapper-' + index);
-
 
         chartsBar.createWidget(endpoint, $canvas, index);
 
@@ -53,6 +50,7 @@
         chartsBar.setCustomLegend(data);
         chartsBar.truncateLabels(data);
         chartsBar.formatLabels(data);
+        chartsBar.setUpMobile(data);
 
         var $chart = new Chart($canvas, data);
 
@@ -71,6 +69,40 @@
   }
 
   /**
+   * Hide ticks of Axis on mobile  if chart is Vertical
+   * @param data (JSON)
+   * current data from endpoint
+   */
+  chartsBar.setUpMobile = function (data) {
+    if (chartsBar._isMobile()) {
+      if (data.type === 'bar') {
+        if (data.options.scales.yAxes[0].hasOwnProperty('ticks')) {
+         $.extend(data.options.scales.yAxes[0].ticks, {
+            display: false,
+          })
+        }
+        $.extend(data.options.scales.xAxes[0], {
+          ticks: {
+            display: false
+          },
+        })
+      }
+      if (data.type === 'horizontalBar') {
+        if (data.options.scales.xAxes[0].hasOwnProperty('ticks')) {
+          $.extend(data.options.scales.xAxes[0].ticks, {
+            display: false,
+          })
+        }
+        $.extend(data.options.scales.yAxes[0], {
+          ticks: {
+            display: false
+          },
+        })
+      }
+    }
+  }
+
+  /**
    * Generate custom Tooltip whit Unit
    * @param data (JSON)
    * data from endpoint
@@ -78,15 +110,15 @@
   chartsBar.setUnit = function (data) {
     data.options.tooltips = {
       callbacks: {
-        title: function(tooltipItem, data) {
+        title: function (tooltipItem, data) {
           return data['labels_original'][tooltipItem[0].index];
         },
         label: function (tooltipItem, data) {
           if (data.hasOwnProperty('unit_position')) {
             if (data['unit_position'] === 'before') {
-              return ' ' + data.unit + ' ' + Number(data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem.index]) + ' ' + data.datasets[tooltipItem.datasetIndex].label;
+              return ' ' + data.unit + ' ' + chartsBar.formatTooltipData(Number(data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem.index])) + ' ' + data.datasets[tooltipItem.datasetIndex].label;
             } else {
-              return ' ' + Number(data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem.index]) + ' ' + data.unit + ' ' + data.datasets[tooltipItem.datasetIndex].label;
+              return ' ' + chartsBar.formatTooltipData(Number(data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem.index])) + ' ' + data.unit + ' ' + data.datasets[tooltipItem.datasetIndex].label;
             }
           }
         }
@@ -100,7 +132,7 @@
    * data from endpoint
    */
   chartsBar.setCustomLegend = function (data) {
-    Object.assign(data.options, {
+    $.extend(data.options, {
       'legendCallback': function (chart) {
         var text = [];
         text.push('<ul class="' + chart.id + '-legend">');
@@ -123,32 +155,43 @@
    * data from endpoint
    */
   chartsBar.truncateLabels = function (data) {
-    Object.assign(data.data , {
-      'labels_original' : []
+    $.extend(data.data, {
+      'labels_original': []
     })
-    for(var i = 0; i<data.data.labels.length; i++) {
+    for (var i = 0; i < data.data.labels.length; i++) {
       data.data.labels_original.push(data.data.labels[i]);
-      if(data.data.labels[i].length > 20) {
-        data.data.labels[i]= chartsBar._splitByWordCount( data.data.labels[i] , 3).join('\r\n');
+      if (data.data.labels[i].length > 20) {
+        data.data.labels[i] = chartsBar._splitByWordCount(data.data.labels[i], 3).join('\r\n');
       }
     }
   }
 
   /**
-   * Format label if it contain
+   * Format label if it contain \n
    * @param data
    */
   chartsBar.formatLabels = function (data) {
-    Object.assign(data, {
+    $.extend(data, {
       plugins: [{
-        beforeInit: function(chart) {
-          chart.data.labels.forEach(function(e, i, a) {
+        beforeInit: function (chart) {
+          chart.data.labels.forEach(function (e, i, a) {
             if (/\n/.test(e)) {
               a[i] = e.split(/\n/);
             }
           });
         }
       }]
+    });
+  }
+
+  /**
+   * Format the tooltip data value in a more readable way
+   * @param value
+   * @returns {string}
+   */
+  chartsBar.formatTooltipData = function (value) {
+    return value.toFixed(0).replace(/./g, function(c, i, a) {
+      return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "'" + c : c;
     });
   }
 
@@ -166,7 +209,15 @@
     return $(window).width() <= 1024
   }
 
-  chartsBar._splitByWordCount= function (str, count) {
+  /**
+   * Group string in array by count
+   * @param str
+   * current string
+   * @param count
+   * @returns {[]}
+   * @private
+   */
+  chartsBar._splitByWordCount = function (str, count) {
     var arr = str.split(' ')
     var r = [];
     while (arr.length) {

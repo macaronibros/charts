@@ -3,7 +3,6 @@
 
   window.chartsCircle = {};
 
-
   /**
    * CHARTJS Plugin register
    */
@@ -166,7 +165,7 @@
    * data from endpoint
    */
   chartsCircle.setCustomLegend = function (data) {
-    Object.assign(data.options, {
+    $.extend(data.options, {
       'legendCallback': function (chart) {
         var text = [];
         var legend_title = "";
@@ -196,17 +195,27 @@
     data.options.tooltips = {
       callbacks: {
         label: function (tooltipItem, data) {
-
           if (data.datasets[0].hasOwnProperty('unit_position')) {
             if (data.datasets[0]['unit_position'] === 'before') {
-              return data.datasets[0]['unit'] + ' ' + Number(data.datasets[0]['data'][tooltipItem.index]) + ' ' + data.labels[tooltipItem.index];
+              return data.datasets[0]['unit'] + ' ' + chartsCircle.formatTooltipData(Number(data.datasets[0]['data'][tooltipItem.index])) + ' ' + data.labels[tooltipItem.index];
             } else {
-              return data.labels[tooltipItem.index] + ' ' + Number(data.datasets[0]['data'][tooltipItem.index]) + ' ' + data.datasets[0]['unit'];
+              return data.labels[tooltipItem.index] + ' ' + chartsCircle.formatTooltipData(Number(data.datasets[0]['data'][tooltipItem.index])) + ' ' + data.datasets[0]['unit'];
             }
           }
         }
       }
     }
+  }
+
+  /**
+   * Format the tooltip data value in a more readable way
+   * @param value
+   * @returns {string}
+   */
+  chartsCircle.formatTooltipData = function (value) {
+    return value.toFixed(0).replace(/./g, function(c, i, a) {
+      return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "'" + c : c;
+    });
   }
 
 

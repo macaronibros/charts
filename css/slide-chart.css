@@ -9,6 +9,10 @@
   width: 100%;
   margin-left: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+.chart-wrapper-slide .slide-infographics * {
+  box-sizing: inherit;
 }
 .chart-wrapper-slide {
   margin-top: 30px;
@@ -112,10 +116,11 @@
     margin-bottom: 0;
   }
 
-  .slide-infographics .slide-item .slide-info{
+  .slide-infographics .slide-item .slide-info {
+    justify-content: center;
     margin: 0 auto;
     border-radius: 20px;
-    padding:20px;
+    padding: 20px;
     width: 80% !important;
   }
   .slide-infographics .slide-item .triangle {
@@ -136,8 +141,8 @@
     height: 100% !important;
   }
   .slide-infographics .slide-item .number .number-item {
-    display: block;
-    padding: 20px 10px;
+    display: inline-block;
+    padding: 20px 0;
   }
   .slide-infographics .slide-item .number .triangle {
     display: none;
@@ -154,5 +159,3 @@
     height: 40px !important;
   }
 }
-
-

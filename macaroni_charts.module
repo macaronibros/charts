@@ -123,6 +123,7 @@ function macaroni_charts_library_info_build() {
     'js' => [
       '/' . $libraries_path . '/jquery.visible.min.js' => ['minified' => TRUE],
     ],
+    'dependencies' => ['core/jquery'],
   ];
 
   return $libraries;

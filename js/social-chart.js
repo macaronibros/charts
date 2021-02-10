@@ -1,5 +1,6 @@
 (function ($) {
   "use strict";
+
   window.chartsSocial = {};
 
   chartsSocial.animated = {};
@@ -67,13 +68,11 @@
     $.each(currentData.data, function (index) {
       var $li = $('<li style="color:' + currentData.backgroundColor[0] + '" data-hover="' + currentData.backgroundColor[1] + '" data-color="' + currentData.backgroundColor[0] + '"></li>');
 
-      var element = '<div class="social" style="border-color:' + currentData.borderColor[0] + '"><div class="icon" style="fill:' + currentData.borderColor[0] + '">' + currentData.icons[index] + '</div>' +
-        '<span class="arrow-down" style="border-top-color:' + currentData.borderColor[0] + '"></span></div>';
+      var element = '<div class="social" style="border-color:' + currentData.borderColor[0] + '"><div class="icon" style="fill:' + currentData.borderColor[0] + '">' + currentData.icons[index] + '</div> <span class="arrow-down" style="border-top-color:' + currentData.borderColor[0] + '"></span></div>';
 
-      element += '<div class="n-format">' + chartsSocial._nFormatter(currentData.data[index]) + '</div>';
+      element += '<div class="n-format">' + chartsSocial._nFormatter(currentData.data[index],2) + '</div>';
 
       element += '<h6>' + data.data.labels[index] + '</h6>';
-
 
       $ul.append($li);
       $li.append(element);
@@ -106,6 +105,7 @@
       'border-color': color,
       'color': color
     });
+
     $socialItem.children('.icon').children('svg').css('fill', color);
     $arrowDown.css('border-top-color', color);
 
@@ -133,6 +133,7 @@
       'border-color': color,
       'color': color
     });
+
     $socialItem.children('.icon').children('svg').css('fill', color)
     $arrowDown.css('border-top-color', color)
 
@@ -157,9 +158,9 @@
       fontIcon = (width * 50) / 100;
       fontLabel = (width * 16) / 100;
     } else if (chartsSocial._isMobile()) {
-      width = 60;
-      height = 60;
-      fontIcon = 30;
+      width = 80;
+      height = 80;
+      fontIcon = 40;
       fontLabel = 16;
     } else {
       width = 100;
@@ -167,11 +168,10 @@
       fontIcon = 50;
       fontLabel = 16;
     }
+    borderWidth = currentData.borderWidth;
 
     var $socialItem = $current.children('.social');
     var $arrowDown = $socialItem.children('.arrow-down');
-
-    var borderWidth = currentData.borderWidth;
 
 
     //change style of social item
@@ -203,7 +203,6 @@
    * Scroll Handler
    */
   chartsSocial.handleScroll = function () {
-
     $(window).scroll(function () {
       var $infographics = $('.social-infographics');
       if ($infographics.length > 0) {
@@ -249,12 +248,10 @@
             }
           });
         }
-
       }
     });
     chartsSocial.animated[$element.parent().attr('id')] = false;
   }
-
 
   /**
    * Helper functions
@@ -279,7 +276,7 @@
    * Formatted number
    * @private
    */
-  chartsSocial._nFormatter = function (number, digits = 2) {
+  chartsSocial._nFormatter = function (number, digits) {
     var value = [
       {value: 1, symbol: ""},
       {value: 1E3, symbol: "K"},
@@ -299,7 +296,6 @@
     return '<div class="number">' + (number / value[i].value).toFixed(digits).replace(regExp, "$1") + '</div>' + value[i].symbol;
   }
 
-
   /**
    * Get number of decimal position of number
    * @param number
@@ -311,7 +307,6 @@
     if (Math.floor(number) === number) return 0;
     return number.toString().split(".")[1].length || 0;
   }
-
 
 })(jQuery);
 

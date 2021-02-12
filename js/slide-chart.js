@@ -301,7 +301,7 @@
     if (chartsSlide._countDecimal(parseFloat(string)) === 0) {
       string = parseFloat(string).toFixed(0);
     }
-    var formattedNumber = string.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+    var formattedNumber = string.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
     if( data.hasOwnProperty('unit') && typeof data.unit[index] !== 'undefined') {
       if (data.unit_position[index].length > 0 && data.unit_position[index] === "before") {

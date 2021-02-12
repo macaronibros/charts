@@ -201,7 +201,7 @@
               return data.labels[tooltipItem.index] + ' ' + formatted_number + ' ' + data.datasets[0]['unit'];
             }
           }else {
-            return formatted_number;
+            return data.labels[tooltipItem.index]+' '+ formatted_number;
           }
         }
       }

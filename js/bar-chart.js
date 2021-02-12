@@ -121,7 +121,7 @@
               return ' ' + formatted_number  + ' ' + data.unit + ' ' + data.datasets[tooltipItem.datasetIndex].label;
             }
           }else {
-            return formatted_number;
+            return data.datasets[tooltipItem.datasetIndex].label+' '+ formatted_number;
           }
         }
       }

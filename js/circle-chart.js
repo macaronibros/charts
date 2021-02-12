@@ -137,9 +137,7 @@
       function (data) {
 
         //set custom tooltip with unit
-        if (data.data.datasets[0].hasOwnProperty('unit')) {
-          chartsCircle.setUnit(data);
-        }
+        chartsCircle.setTooltips(data);
 
         chartsCircle.setCustomLegend(data);
 
@@ -191,16 +189,19 @@
    * @param data (JSON)
    * data from endpoint
    */
-  chartsCircle.setUnit = function (data) {
+  chartsCircle.setTooltips = function (data) {
     data.options.tooltips = {
       callbacks: {
         label: function (tooltipItem, data) {
-          if (data.datasets[0].hasOwnProperty('unit_position')) {
+          var formatted_number = chartsCircle.formatTooltipData(Number(data.datasets[0]['data'][tooltipItem.index]));
+          if (data.datasets[0].hasOwnProperty('unit') && data.datasets[0].hasOwnProperty('unit_position')) {
             if (data.datasets[0]['unit_position'] === 'before') {
-              return data.datasets[0]['unit'] + ' ' + chartsCircle.formatTooltipData(Number(data.datasets[0]['data'][tooltipItem.index])) + ' ' + data.labels[tooltipItem.index];
+              return data.datasets[0]['unit'] + ' ' + formatted_number + ' ' + data.labels[tooltipItem.index];
             } else {
-              return data.labels[tooltipItem.index] + ' ' + chartsCircle.formatTooltipData(Number(data.datasets[0]['data'][tooltipItem.index])) + ' ' + data.datasets[0]['unit'];
+              return data.labels[tooltipItem.index] + ' ' + formatted_number + ' ' + data.datasets[0]['unit'];
             }
+          }else {
+            return formatted_number;
           }
         }
       }
@@ -213,7 +214,8 @@
    * @returns {string}
    */
   chartsCircle.formatTooltipData = function (value) {
-    return value.toFixed(0).replace(/./g, function(c, i, a) {
+    var unit =  chartsCircle._countDecimal(value);
+    return value.toFixed(unit).replace(/./g, function(c, i, a) {
       return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
     });
   }
@@ -231,6 +233,19 @@
   chartsCircle._isMobile = function () {
     return $(window).width() <= 1024
   }
+
+  /**
+   * Get number of decimal position of number
+   * @param number
+   * @returns {number|number}
+   * number of decimal position of number
+   * @private
+   */
+  chartsCircle._countDecimal = function (number) {
+    if (Math.floor(number) === number) return 0;
+    return number.toString().split(".")[1].length || 0;
+  }
+
 
 })(jQuery);
 

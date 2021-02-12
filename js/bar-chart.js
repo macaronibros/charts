@@ -43,9 +43,8 @@
       function (data) {
 
         //set custom tooltip with unit
-        if (data.data.hasOwnProperty('unit')) {
-          chartsBar.setUnit(data);
-        }
+        chartsBar.setTooltips(data);
+
 
         chartsBar.setCustomLegend(data);
         chartsBar.truncateLabels(data);
@@ -107,19 +106,22 @@
    * @param data (JSON)
    * data from endpoint
    */
-  chartsBar.setUnit = function (data) {
+  chartsBar.setTooltips = function (data) {
     data.options.tooltips = {
       callbacks: {
         title: function (tooltipItem, data) {
           return data['labels_original'][tooltipItem[0].index];
         },
         label: function (tooltipItem, data) {
-          if (data.hasOwnProperty('unit_position')) {
+          var formatted_number = chartsBar._formatTooltipData(Number(data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem.index]));
+          if (data.hasOwnProperty('unit') && data.hasOwnProperty('unit_position')) {
             if (data['unit_position'] === 'before') {
-              return ' ' + data.unit + ' ' + chartsBar.formatTooltipData(Number(data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem.index])) + ' ' + data.datasets[tooltipItem.datasetIndex].label;
+              return ' ' + data.unit + ' ' + formatted_number + ' ' + data.datasets[tooltipItem.datasetIndex].label;
             } else {
-              return ' ' + chartsBar.formatTooltipData(Number(data.datasets[tooltipItem.datasetIndex]['data'][tooltipItem.index])) + ' ' + data.unit + ' ' + data.datasets[tooltipItem.datasetIndex].label;
+              return ' ' + formatted_number  + ' ' + data.unit + ' ' + data.datasets[tooltipItem.datasetIndex].label;
             }
+          }else {
+            return formatted_number;
           }
         }
       }
@@ -189,8 +191,9 @@
    * @param value
    * @returns {string}
    */
-  chartsBar.formatTooltipData = function (value) {
-    return value.toFixed(0).replace(/./g, function(c, i, a) {
+  chartsBar._formatTooltipData = function (value) {
+    var unit =  chartsBar._countDecimal(value);
+    return value.toFixed(unit).replace(/./g, function(c, i, a) {
       return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
     });
   }
@@ -224,6 +227,18 @@
       r.push(arr.splice(0, count).join(' '))
     }
     return r;
+  }
+
+  /**
+   * Get number of decimal position of number
+   * @param number
+   * @returns {number|number}
+   * number of decimal position of number
+   * @private
+   */
+  chartsBar._countDecimal = function (number) {
+    if (Math.floor(number) === number) return 0;
+    return number.toString().split(".")[1].length || 0;
   }
 
 })(jQuery);
